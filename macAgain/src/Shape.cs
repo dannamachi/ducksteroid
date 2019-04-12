@@ -6,7 +6,7 @@ namespace MyGame.src
 {
     public class Shape
     {
-        private string _thing;
+        protected string _thing;
         public Shape(string thing)
         {
             _thing = thing;

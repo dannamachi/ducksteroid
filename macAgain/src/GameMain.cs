@@ -12,7 +12,7 @@ namespace MyGame
             SwinGame.OpenGraphicsWindow("GameMain", 800, 600);
             SwinGame.ShowSwinGameSplashScreen();
             Shape thing = new Shape("Hello will this work?");
-
+            Button idk = new Button("I swear to god peter");
             
             //Run the game loop
             while (false == SwinGame.WindowCloseRequested())
@@ -26,6 +26,7 @@ namespace MyGame
 
                 //Draw onto the screen
                 SwinGame.DrawText(thing.Thing, Color.Black, 50, 50);
+                SwinGame.DrawText(idk.Thing, Color.Black, 50, 100);
                 SwinGame.RefreshScreen(60);
 
             }
