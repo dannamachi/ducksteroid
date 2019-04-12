@@ -13,6 +13,7 @@ namespace MyGame
             SwinGame.ShowSwinGameSplashScreen();
             Shape thing = new Shape("Hello will this work?");
 
+            
             //Run the game loop
             while (false == SwinGame.WindowCloseRequested())
             {

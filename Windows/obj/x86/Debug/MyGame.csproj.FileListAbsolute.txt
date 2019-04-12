@@ -1,0 +1,2 @@
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\Windows\obj\x86\Debug\MyGame.csprojAssemblyReference.cache
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\Windows\obj\x86\Debug\MyGame.csproj.CoreCompileInputs.cache
