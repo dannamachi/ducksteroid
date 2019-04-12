@@ -1,5 +1,6 @@
 using System;
 using SwinGameSDK;
+using MyGame.src;
 
 namespace MyGame
 {
@@ -10,6 +11,7 @@ namespace MyGame
             //Open the game window
             SwinGame.OpenGraphicsWindow("GameMain", 800, 600);
             SwinGame.ShowSwinGameSplashScreen();
+            Shape thing = new Shape("Hello will this work?");
             
             //Run the game loop
             while(false == SwinGame.WindowCloseRequested())
@@ -23,6 +25,7 @@ namespace MyGame
                 
                 //Draw onto the screen
                 SwinGame.RefreshScreen(60);
+                SwinGame.DrawText(thing.Thing, Color.Black, 50, 50);
             }
         }
     }
