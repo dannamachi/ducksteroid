@@ -59,8 +59,6 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="src\Button.cs" />
-
-    <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\Screen.cs" />
     <Compile Include="src\Drawing.cs" />
