@@ -1,16 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SwinGameSDK;
 
 namespace MyGame.src
 {
-    public class Shape
+    public abstract class Shape
     {
-        protected string _thing;
-        public Shape(string thing)
+        //fields
+        private Color color;
+        private float x, y;
+        private bool selected;
+        //constructos
+        public Shape(Color clr)
         {
-            _thing = thing;
+            color = clr;
+            x = 0;
+            y = 0;
+            selected = false;
         }
-        public string Thing { get => _thing; }
+        public Shape() : this(Color.White) { }
+        //properties
+        public float X { get => x; }
+        public float Y { get => y; }
+        public bool Selected { get => selected; set => selected = value; }
+        //methods
+        public abstract void Draw();
+        public abstract bool IsAt(Point2D pt);
+
     }
 }
