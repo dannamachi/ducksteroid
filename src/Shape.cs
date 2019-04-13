@@ -21,6 +21,7 @@ namespace MyGame.src
         }
         public Shape() : this(Color.White) { }
         //properties
+        public Color Color { get => color; set => color = value; }
         public float X { get => x; set => x = value; }
         public float Y { get => y; set => y = value; }
         public bool Selected { get => selected; set => selected = value; }

@@ -19,5 +19,19 @@ namespace MyGame.src
             width = w;
             height = h;
         }
+        public Rectangle () : this (Color.Red,0,0,0,0) { }
+        //properties
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
+        //methods
+        public override void Draw()
+        {
+            SwinGame.FillRectangle(Color, X, Y, width, height);
+        }
+        public override bool IsAt(Point2D pt)
+        {
+            return SwinGame.PointInRect(pt, X, Y, width, height);
+        }
+
     }
 }
