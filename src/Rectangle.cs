@@ -19,7 +19,7 @@ namespace MyGame.src
             width = w;
             height = h;
         }
-        public Rectangle () : this (Color.Red,0,0,0,0) { }
+        public Rectangle () : this (Color.Black,0,0,50,50) { }
         //properties
         public int Width { get => width; set => width = value; }
         public int Height { get => height; set => height = value; }
