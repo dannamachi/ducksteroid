@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="src\Button.cs" />
     <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Rectangle.cs" />
     <Compile Include="src\Shape.cs" />
   </ItemGroup>
   <ItemGroup>
