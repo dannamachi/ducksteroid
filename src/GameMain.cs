@@ -9,27 +9,34 @@ namespace MyGame
         public static void Main()
         {
             //Open the game window
-            SwinGame.OpenGraphicsWindow("GameMain", 800, 600);
+            SwinGame.OpenGraphicsWindow("DuckSteroids", 800, 600);
             SwinGame.ShowSwinGameSplashScreen();
-            Shape thing = new Shape("Hello will this work?");
-            Button idk = new Button("I swear to god peter");
-            
+     
+            Screen background = new Screen();
+       
             //Run the game loop
             while (false == SwinGame.WindowCloseRequested())
             {
+                
                 //Fetch the next batch of UI interaction
                 SwinGame.ProcessEvents();
+
+           
 
                 //Clear the screen and draw the framerate
                 SwinGame.ClearScreen(Color.White);
                 SwinGame.DrawFramerate(0, 0);
 
+                //Draw Background
+                background.DrawBackground();
+
                 //Draw onto the screen
-                SwinGame.DrawText(thing.Thing, Color.Black, 50, 50);
-                SwinGame.DrawText(idk.Thing, Color.Black, 50, 100);
+              
                 SwinGame.RefreshScreen(60);
 
             }
+            SwinGame.FreeBitmap(background.GameScreen);
+
         }
     }
 }
