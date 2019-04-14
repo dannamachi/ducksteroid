@@ -32,6 +32,9 @@ namespace MyGame.src
         }
         public Duck(float x, float y, int radius)
         {
+            _exists = true;
+            _pos = new Point2D();
+            _vel = new Vector();
             _rad = radius;
             _pos.X = x;
             _pos.Y = y;
@@ -42,8 +45,21 @@ namespace MyGame.src
         //Properties
         public int Radius { set => _rad = value; get => _rad; }
 
-        public Orientation Orientation { get => _orientation; set => _orientation = value; }
+        public Orientation Orientation { get => _orientation; }
 
+        public Point2D Position { get => _pos; }
+
+
+        public void Killed ()
+        {
+            _exists = false;
+        }
+        public void FlipDuck()
+        {
+            if (_orientation == Orientation.Left) { _orientation = Orientation.Right; }
+            else { _orientation = Orientation.Left; }
+
+        }
         public void DuckLoad()
         {
             leftDuck = SwinGame.LoadBitmap("DuckLeft.png");
@@ -54,9 +70,14 @@ namespace MyGame.src
         public void DrawDuckAnimation()
         {
 
-            if (_orientation == Orientation.Left) { SwinGame.DrawBitmap(leftDuck, _x, _y); }
-            else { SwinGame.DrawBitmap(rightDuck, _x, _y); }
+            if (_orientation == Orientation.Left) { SwinGame.DrawBitmap(leftDuck, _pos.X, _pos.Y); }
+            else { SwinGame.DrawBitmap(rightDuck, _pos.X, _pos.Y); }
 
+        }
+
+        public bool IsAt (Point2D pt)
+        {
+            return SwinGame.PointInCircle(pt, _pos.X, _pos.Y, _rad);
         }
 
         public Bitmap LeftDuck { get => leftDuck; }
