@@ -8,23 +8,23 @@ namespace MyGame.src
     public abstract class Shape
     {
         //fields
-        private Color color;
-        private float x, y;
-        private bool selected;
+        private Color _color;
+        private float _x, _y;
+        private bool _selected;
         //constructos
         public Shape(Color clr)
         {
-            color = clr;
-            x = 0;
-            y = 0;
-            selected = false;
+            _color = clr;
+            _x = 0;
+            _y = 0;
+            _selected = false;
         }
         public Shape() : this(Color.White) { }
         //properties
-        public Color Color { get => color; set => color = value; }
-        public float X { get => x; set => x = value; }
-        public float Y { get => y; set => y = value; }
-        public bool Selected { get => selected; set => selected = value; }
+        public Color Color { get => _color; set => _color = value; }
+        public float X { get => _x; set => _x = value; }
+        public float Y { get => _y; set => _y = value; }
+        public bool Selected { get => _selected; set => _selected = value; }
         //methods
         public abstract void Draw();
         public abstract bool IsAt(Point2D pt);

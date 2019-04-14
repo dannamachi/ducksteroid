@@ -9,28 +9,28 @@ namespace MyGame.src
     public class Rectangle : Shape
     {
         //fields
-        private int width;
-        private int height;
+        private int _width;
+        private int _height;
         //constructors
         public Rectangle (Color clr, float x, float y, int w, int h) : base (clr)
         {
             X = x;
             Y = y;
-            width = w;
-            height = h;
+            _width = w;
+            _height = h;
         }
         public Rectangle () : this (Color.Black,0,0,50,50) { }
         //properties
-        public int Width { get => width; set => width = value; }
-        public int Height { get => height; set => height = value; }
+        public int Width { get => _width; set => _width = value; }
+        public int Height { get => _height; set => _height = value; }
         //methods
         public override void Draw()
         {
-            SwinGame.FillRectangle(Color, X, Y, width, height);
+            SwinGame.FillRectangle(Color, X, Y, _width, _height);
         }
         public override bool IsAt(Point2D pt)
         {
-            return SwinGame.PointInRect(pt, X, Y, width, height);
+            return SwinGame.PointInRect(pt, X, Y, _width, _height);
         }
 
     }
