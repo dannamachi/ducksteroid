@@ -22,8 +22,6 @@ namespace MyGame.src
         private Point2D _pos;
         private Orientation _orientation;
 
-        private int _x;
-        private int _y;
 
         public bool Exist
         {
