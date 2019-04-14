@@ -23,7 +23,7 @@ namespace MyGame.src
 
         //Properties
         public Triangle TriangleShip { get => _triangle; set => _triangle = value; }
-
+        public List<Bullet> Bullets { get => _bullets; }
         //Methods
         //Draw the the ship
         public override void Draw () => SwinGame.FillTriangle(Color, TriangleShip);
@@ -34,10 +34,10 @@ namespace MyGame.src
         //Update the location of the ship
         public void Update ()
         {
-
+            TriangleShip = SwinGame.CreateTriangle (X, Y, X - 15, Y + 20, X + 15, Y + 20);
         }
 
-        //Add bullet to the list of bullets
+        //Add bullet to the list of bullets 
         public void AddBullet () => _bullets.Add (new Bullet (Color.White,X,Y,3));
         //Shot bullet
         public void Shoot ()
