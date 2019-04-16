@@ -22,6 +22,7 @@ namespace MyGame.src
 
         //Properties
         public int Radius { set => _radius = value; get => _radius; }
+        public Point2D Position { get => _position; }
 
         //Methods
         //Draw a bullet

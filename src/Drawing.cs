@@ -9,13 +9,13 @@ namespace MyGame.src
     public class Drawing
     {
         //fields
-        private List<Shape> shapes;
-        private Bitmap background;
+        private List<Shape> _shapes;
+        private Bitmap _background;
         //constructors
         public Drawing(Bitmap bkground)
         {
-            shapes = new List<Shape>();
-            background = bkground;
+            _shapes = new List<Shape>();
+            _background = bkground;
         }
         public Drawing() : this(new Bitmap(1,1))
         {
@@ -26,7 +26,7 @@ namespace MyGame.src
             get
             {
                 List<Shape> result = new List<Shape>();
-                foreach (Shape sh in shapes)
+                foreach (Shape sh in _shapes)
                 {
                     if (sh.Selected)
                         result.Add(sh);
@@ -38,25 +38,25 @@ namespace MyGame.src
         {
             get
             {
-                return shapes.Count;
+                return _shapes.Count;
             }
         }
         public Bitmap Background
         {
-            get => background;
-            set => background = value;
+            get => _background;
+            set => _background = value;
         }
         //methods
         public void Draw()
         {
-            foreach (Shape sh in shapes)
+            foreach (Shape sh in _shapes)
             {
                 sh.Draw();
             }
         }
         public void SelectShapesAt(Point2D pt)
         {
-            foreach (Shape sh in shapes)
+            foreach (Shape sh in _shapes)
             {
                 if (sh.IsAt(pt))
                     sh.Selected = true;
@@ -65,7 +65,7 @@ namespace MyGame.src
         public void AddShape(Shape s)
         {
             if (s != null)
-                shapes.Add(s);
+                _shapes.Add(s);
         }
     }
 }

@@ -58,11 +58,14 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="src\Button.cs" />
-    <Compile Include="src\Drawing.cs" />
+    <Compile Include="src\Bullet.cs" />
+    <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Screen.cs" />
+    <Compile Include="src\Drawing.cs" />
     <Compile Include="src\Rectangle.cs" />
     <Compile Include="src\Shape.cs" />
+    <Compile Include="src\Ship.cs" />
     <Compile Include="src\Text.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +92,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\fonts\maven_pro_regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\starSky.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\DuckLeft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\DuckRight.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\images\fdFile.png">

@@ -24,6 +24,7 @@ namespace MyGame.src
         //Properties
         public Triangle TriangleShip { get => _triangle; set => _triangle = value; }
         public List<Bullet> Bullets { get => _bullets; }
+
         //Methods
         //Draw the the ship
         public override void Draw () => SwinGame.FillTriangle(Color, TriangleShip);
