@@ -111,3 +111,6 @@ C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\obj\x86\D
 C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\obj\x86\Debug-Mac\MyGame.csproj.CopyComplete
 C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\obj\x86\Debug-Mac\MyGame.exe
 C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\obj\x86\Debug-Mac\MyGame.pdb
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\bin\Debug\Resources\images\DuckLeft.png
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\bin\Debug\Resources\images\DuckRight.png
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\bin\Debug\Resources\images\starSky.jpg
