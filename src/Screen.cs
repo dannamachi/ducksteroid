@@ -90,6 +90,7 @@ namespace MyGame.src
                     _ducks.Remove(d);
                 }
 
+                CheckShooting();
             }
         }
         private void SpawnDuck()
@@ -121,9 +122,24 @@ namespace MyGame.src
             Duck duckie = new Duck(X, Y, R);
             _ducks.Add(duckie);
         }
-        private void CheckCollision()
+        private void CheckShooting()
         {
-
+            List<Bullet> removebullet = new List<Bullet>();
+            foreach (Bullet bu in _ship.Bullets)
+            {
+                foreach (Duck d in _ducks)
+                {
+                    if (d.IsAt(bu.Position))
+                    {
+                        d.Killed();
+                        removebullet.Add(bu);
+                    }
+                }
+            }
+            foreach (Bullet bu in removebullet)
+            {
+                _ship.Bullets.Remove(bu);
+            }
         }
         private bool Contain(Point2D pt, int rad)
         {
