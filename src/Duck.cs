@@ -32,7 +32,12 @@ namespace MyGame.src
         {
             _exists = true;
             _pos = new Point2D();
+
             _vel = new Vector();
+            Random random = new Random();
+            _vel.X = random.Next(-5, 5);
+            _vel.Y = random.Next(-5, 5);
+
             _rad = radius;
             _pos.X = x;
             _pos.Y = y;
@@ -85,10 +90,8 @@ namespace MyGame.src
         public void Update() { }
 
 
-        public void MoveDuck(float x, float y)
+        public void MoveDuck()
         {
-            _vel.Y = -1;
-            _vel.X = 0;
             _pos = SwinGame.AddVectors(_pos, _vel);
 
         }

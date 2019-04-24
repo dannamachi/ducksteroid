@@ -41,7 +41,8 @@ namespace MyGame.src
                 _ship.Shoot();
                 foreach (Duck d in _ducks)
                 {
-                    d.DrawDuckAnimation();
+                    if (d.Exist && Contain(d.Position,d.Radius))
+                        d.DrawDuckAnimation();
                 }
             }
         }
@@ -62,6 +63,18 @@ namespace MyGame.src
                     ProcessPause();
                     break;
             }
+        }
+        private bool Contain(Point2D pt, int rad)
+        {
+            float X = pt.X;
+            float Y = pt.Y;
+            float R = rad;
+
+            if (X + R < 0 || Y + R < 0)
+                return false;
+            if (X - R > 800 || Y - R > 600)
+                return false;
+            return true;
         }
         private void InitializeGame()
         {
@@ -93,22 +106,34 @@ namespace MyGame.src
             //need to add condition for when ship is hit/dead
             if (SwinGame.KeyDown(KeyCode.vk_RIGHT))
             {
-                _ship.X += 1;
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.X += 1;
+                if (Contain(shipcenter, 14))
+                    _ship.X += 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
             if (SwinGame.KeyDown(KeyCode.vk_LEFT))
             {
-                _ship.X -= 1;
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.X -= 1;
+                if (Contain(shipcenter, 14))
+                    _ship.X -= 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
             if (SwinGame.KeyDown(KeyCode.vk_UP))
             {
-                _ship.Y -= 1;
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.Y -= 1;
+                if (Contain(shipcenter, 14))
+                    _ship.Y -= 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
             if (SwinGame.KeyDown(KeyCode.vk_DOWN))
             {
-                _ship.Y += 1;
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.Y += 1;
+                if (Contain(shipcenter, 14))
+                    _ship.Y += 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
             if (SwinGame.MouseClicked(MouseButton.LeftButton)) { _ship.AddBullet(); }
