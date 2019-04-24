@@ -13,6 +13,13 @@ namespace MyGame.src
         GOver,
         Pause
     }
+    public enum SpawnSide
+    {
+        Top,
+        Right,
+        Bottom,
+        Left
+    }
     public class Screen
     {
         //fields
@@ -25,11 +32,8 @@ namespace MyGame.src
         //constructors
         public Screen()
         {
-            _screentype = ScreenType.Title;
-            _drawing = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
-            _saveddrawing = null;
-            _ship = null;
-            _ducks = null;
+            _screentype = ScreenType.Game;
+            InitializeGame();
         }
         //properties
         public Bitmap Background { get => _drawing.Background; }
@@ -37,41 +41,201 @@ namespace MyGame.src
         //methods
         public void Draw()
         {
-
-        }
-        public void InitializeGame()
-        {
-
-        }
-        public void InitializeTitle()
-        {
-
-        }
-        public void InitializeGOver()
-        {
-
-        }
-        public void InitializePause()
-        {
-
+            _drawing.Draw();
+            if (IsPlaying)
+            {
+                _ship.Draw();
+                _ship.Shoot();
+                foreach (Duck d in _ducks)
+                {
+                    d.DrawDuckAnimation();
+                }
+            }
         }
         public void ProcessInput()
         {
-
+            switch (_screentype)
+            {
+                case ScreenType.Game:
+                    ProcessGame();
+                    break;
+                case ScreenType.Title:
+                    ProcessTitle();
+                    break;
+                case ScreenType.GOver:
+                    ProcessGOver();
+                    break;
+                case ScreenType.Pause:
+                    ProcessPause();
+                    break;
+            }
         }
-        public void ProcessGame()
+        public void Update()
+        {
+            if (IsPlaying)
+            {
+                List<Bullet> removebullet = new List<Bullet>();
+                foreach (Bullet bu in _ship.Bullets)
+                {
+                    if (!Contain(bu.Position, bu.Radius))
+                        removebullet.Add(bu);
+                }
+                foreach (Bullet bu in removebullet)
+                {
+                    _ship.Bullets.Remove(bu);
+                }
+
+                List<Duck> removeduck = new List<Duck>();
+                foreach (Duck d in _ducks)
+                {
+                    d.MoveDuck();
+                    if (!(d.Exist && Contain(d.Position, d.Radius)))
+                        removeduck.Add(d);
+                }
+                foreach (Duck d in removeduck)
+                {
+                    _ducks.Remove(d);
+                }
+
+                CheckShooting();
+            }
+        }
+        private void SpawnDuck()
+        {
+            Random random = new Random();
+            int spawnrand = random.Next(1, 4);
+            int R = random.Next(10, 30);
+            float X = (-1) * 2 * R;
+            float Y = X;
+            SpawnSide spawnside = SpawnSide.Top;
+            switch (spawnrand)
+            {
+                case 1:
+                    spawnside = SpawnSide.Top;
+                    X = random.Next(0, 800);
+                    Y = (-1) * R;
+                    break;
+                case 2:
+                    spawnside = SpawnSide.Right;
+                    Y = random.Next(0, 600);
+                    X = 800 + R;
+                    break;
+                case 3:
+                    spawnside = SpawnSide.Bottom;
+                    X = random.Next(0, 800);
+                    Y = 600 + R;
+                    break;
+                case 4:
+                    spawnside = SpawnSide.Left;
+                    Y = random.Next(0, 600);
+                    X = (-1) * R;
+                    break;
+            }
+            Duck duckie = new Duck(X, Y, R, spawnside);
+            _ducks.Add(duckie);
+        }
+        private void CheckShooting()
+        {
+            List<Bullet> removebullet = new List<Bullet>();
+            foreach (Bullet bu in _ship.Bullets)
+            {
+                foreach (Duck d in _ducks)
+                {
+                    if (d.IsAt(bu.Position))
+                    {
+                        d.Killed();
+                        removebullet.Add(bu);
+                    }
+                }
+            }
+            foreach (Bullet bu in removebullet)
+            {
+                _ship.Bullets.Remove(bu);
+            }
+        }
+        private bool Contain(Point2D pt, int rad)
+        {
+            float X = pt.X;
+            float Y = pt.Y;
+            float R = rad;
+
+            if (X + 2*R < 0 || Y + 2*R < 0)
+                return false;
+            if (X - 2*R > 800 || Y - 2*R > 600)
+                return false;
+            return true;
+        }
+        private void InitializeGame()
+        {
+            Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
+            _drawing = temp;
+            _saveddrawing = temp;
+            _ship = new Ship(Color.White,400,300);
+            _ducks = new List<Duck>();
+        }
+        private void InitializeTitle()
+        {
+            _drawing = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
+            _saveddrawing = null;
+            _ship = null;
+            _ducks = null;
+        }
+        private void InitializeGOver()
         {
 
         }
-        public void ProcessTitle()
+        private void InitializePause()
         {
 
         }
-        public void ProcessGOver()
+        private void ProcessGame()
+        {
+            //need to add condition for when ship is hit/dead
+            if (SwinGame.KeyDown(KeyCode.vk_RIGHT))
+            {
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.X += 1;
+                if (Contain(shipcenter, 7))
+                    _ship.X += 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_LEFT))
+            {
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.X -= 1;
+                if (Contain(shipcenter, 7))
+                    _ship.X -= 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_UP))
+            {
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.Y -= 1;
+                if (Contain(shipcenter, 7))
+                    _ship.Y -= 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_DOWN))
+            {
+                Point2D shipcenter = _ship.TriangleShip.Barycenter();
+                shipcenter.Y += 1;
+                if (Contain(shipcenter, 7))
+                    _ship.Y += 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.MouseClicked(MouseButton.LeftButton)) { _ship.AddBullet(); }
+
+            if (SwinGame.KeyTyped(KeyCode.vk_SPACE)) { SpawnDuck(); }
+        }
+        private void ProcessTitle()
         {
 
         }
-        public void ProcessPause()
+        private void ProcessGOver()
+        {
+
+        }
+        private void ProcessPause()
         {
 
         }

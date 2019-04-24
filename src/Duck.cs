@@ -32,13 +32,42 @@ namespace MyGame.src
         {
             _exists = true;
             _pos = new Point2D();
+
             _vel = new Vector();
+            Random random = new Random();
+            _vel.X = random.Next(-5, 5);
+            _vel.Y = random.Next(-5, 5);
+
             _rad = radius;
             _pos.X = x;
             _pos.Y = y;
             _orientation = Orientation.Right;
             DuckLoad();
 
+        }
+
+        public Duck(float x, float y, int radius, SpawnSide side) : this(x,y,radius)
+        {
+            Random random = new Random();
+            switch (side)
+            {
+                case SpawnSide.Top:
+                    _vel.X = random.Next(-5, 5);
+                    _vel.Y = random.Next(1, 5);
+                    break;
+                case SpawnSide.Right:
+                    _vel.X = random.Next(1, 5);
+                    _vel.Y = random.Next(-5, 5);
+                    break;
+                case SpawnSide.Left:
+                    _vel.X = random.Next(-5, -1);
+                    _vel.Y = random.Next(-5, 5);
+                    break;
+                case SpawnSide.Bottom:
+                    _vel.X = random.Next(-5, 5);
+                    _vel.Y = random.Next(-5, -1);
+                    break;
+            }
         }
         //Properties
         public int Radius { set => _rad = value; get => _rad; }
@@ -85,10 +114,8 @@ namespace MyGame.src
         public void Update() { }
 
 
-        public void MoveDuck(float x, float y)
+        public void MoveDuck()
         {
-            _vel.Y = -1;
-            _vel.X = 0;
             _pos = SwinGame.AddVectors(_pos, _vel);
 
         }

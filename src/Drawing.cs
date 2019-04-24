@@ -49,6 +49,7 @@ namespace MyGame.src
         //methods
         public void Draw()
         {
+            SwinGame.DrawBitmap(_background, 0, 0);
             foreach (Shape sh in _shapes)
             {
                 sh.Draw();
