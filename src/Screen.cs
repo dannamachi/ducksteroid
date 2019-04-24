@@ -6,19 +6,74 @@ using SwinGameSDK;
 
 namespace MyGame.src
 {
+    public enum ScreenType
+    {
+        Game,
+        Title,
+        GOver,
+        Pause
+    }
     public class Screen
     {
-        private Bitmap gameScreen;
+        //fields
+        private ScreenType _screentype;
+        private Drawing _drawing;
+        private Drawing _saveddrawing;
+        private Ship _ship;
+        private List<Duck> _ducks;
 
-      
-        public void DrawBackground()
-        {
-            SwinGame.DrawBitmap(gameScreen, 0, 0);
-        }
+        //constructors
         public Screen()
         {
-            gameScreen = SwinGame.LoadBitmap("starSky.jpg");
+            _screentype = ScreenType.Title;
+            _drawing = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
+            _saveddrawing = null;
+            _ship = null;
+            _ducks = null;
         }
-        public Bitmap GameScreen { get => gameScreen; }
+        //properties
+        public Bitmap Background { get => _drawing.Background; }
+        public bool IsPlaying { get => _screentype == ScreenType.Game; }
+        //methods
+        public void Draw()
+        {
+
+        }
+        public void InitializeGame()
+        {
+
+        }
+        public void InitializeTitle()
+        {
+
+        }
+        public void InitializeGOver()
+        {
+
+        }
+        public void InitializePause()
+        {
+
+        }
+        public void ProcessInput()
+        {
+
+        }
+        public void ProcessGame()
+        {
+
+        }
+        public void ProcessTitle()
+        {
+
+        }
+        public void ProcessGOver()
+        {
+
+        }
+        public void ProcessPause()
+        {
+
+        }
     }
 }
