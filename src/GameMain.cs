@@ -23,7 +23,7 @@ namespace MyGame
 
 
                 screen.ProcessInput();
- 
+                screen.Update();
 
 
                 //Clear the screen and draw the framerate

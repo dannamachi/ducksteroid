@@ -41,8 +41,7 @@ namespace MyGame.src
                 _ship.Shoot();
                 foreach (Duck d in _ducks)
                 {
-                    if (d.Exist && Contain(d.Position,d.Radius))
-                        d.DrawDuckAnimation();
+                    d.DrawDuckAnimation();
                 }
             }
         }
@@ -64,15 +63,77 @@ namespace MyGame.src
                     break;
             }
         }
+        public void Update()
+        {
+            if (IsPlaying)
+            {
+                List<Bullet> removebullet = new List<Bullet>();
+                foreach (Bullet bu in _ship.Bullets)
+                {
+                    if (!Contain(bu.Position, bu.Radius))
+                        removebullet.Add(bu);
+                }
+                foreach (Bullet bu in removebullet)
+                {
+                    _ship.Bullets.Remove(bu);
+                }
+
+                List<Duck> removeduck = new List<Duck>();
+                foreach (Duck d in _ducks)
+                {
+                    d.MoveDuck();
+                    if (!(d.Exist && Contain(d.Position, d.Radius)))
+                        removeduck.Add(d);
+                }
+                foreach (Duck d in removeduck)
+                {
+                    _ducks.Remove(d);
+                }
+
+            }
+        }
+        private void SpawnDuck()
+        {
+            Random random = new Random();
+            int spawnrand = random.Next(1, 4);
+            int R = random.Next(10, 30);
+            float X = (-1) * 2 * R;
+            float Y = X;
+            switch (spawnrand)
+            {
+                case 1:
+                    X = random.Next(0, 800);
+                    Y = (-1) * R;
+                    break;
+                case 2:
+                    Y = random.Next(0, 600);
+                    X = 800 + R;
+                    break;
+                case 3:
+                    X = random.Next(0, 800);
+                    Y = 600 + R;
+                    break;
+                case 4:
+                    Y = random.Next(0, 600);
+                    X = (-1) * R;
+                    break;
+            }
+            Duck duckie = new Duck(X, Y, R);
+            _ducks.Add(duckie);
+        }
+        private void CheckCollision()
+        {
+
+        }
         private bool Contain(Point2D pt, int rad)
         {
             float X = pt.X;
             float Y = pt.Y;
             float R = rad;
 
-            if (X + R < 0 || Y + R < 0)
+            if (X + 2*R < 0 || Y + 2*R < 0)
                 return false;
-            if (X - R > 800 || Y - R > 600)
+            if (X - 2*R > 800 || Y - 2*R > 600)
                 return false;
             return true;
         }
@@ -81,10 +142,8 @@ namespace MyGame.src
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
             _drawing = temp;
             _saveddrawing = temp;
-            _ship = new Ship();
+            _ship = new Ship(Color.White,400,300);
             _ducks = new List<Duck>();
-
-            _ducks.Add(new Duck(100, 100, 50));
         }
         private void InitializeTitle()
         {
@@ -108,7 +167,7 @@ namespace MyGame.src
             {
                 Point2D shipcenter = _ship.TriangleShip.Barycenter();
                 shipcenter.X += 1;
-                if (Contain(shipcenter, 14))
+                if (Contain(shipcenter, 7))
                     _ship.X += 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
@@ -116,7 +175,7 @@ namespace MyGame.src
             {
                 Point2D shipcenter = _ship.TriangleShip.Barycenter();
                 shipcenter.X -= 1;
-                if (Contain(shipcenter, 14))
+                if (Contain(shipcenter, 7))
                     _ship.X -= 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
@@ -124,7 +183,7 @@ namespace MyGame.src
             {
                 Point2D shipcenter = _ship.TriangleShip.Barycenter();
                 shipcenter.Y -= 1;
-                if (Contain(shipcenter, 14))
+                if (Contain(shipcenter, 7))
                     _ship.Y -= 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
@@ -132,11 +191,13 @@ namespace MyGame.src
             {
                 Point2D shipcenter = _ship.TriangleShip.Barycenter();
                 shipcenter.Y += 1;
-                if (Contain(shipcenter, 14))
+                if (Contain(shipcenter, 7))
                     _ship.Y += 1;
                 _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
             }
             if (SwinGame.MouseClicked(MouseButton.LeftButton)) { _ship.AddBullet(); }
+
+            if (SwinGame.KeyTyped(KeyCode.vk_SPACE)) { SpawnDuck(); }
         }
         private void ProcessTitle()
         {
