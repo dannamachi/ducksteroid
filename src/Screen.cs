@@ -13,6 +13,13 @@ namespace MyGame.src
         GOver,
         Pause
     }
+    public enum SpawnSide
+    {
+        Top,
+        Right,
+        Bottom,
+        Left
+    }
     public class Screen
     {
         //fields
@@ -100,26 +107,31 @@ namespace MyGame.src
             int R = random.Next(10, 30);
             float X = (-1) * 2 * R;
             float Y = X;
+            SpawnSide spawnside = SpawnSide.Top;
             switch (spawnrand)
             {
                 case 1:
+                    spawnside = SpawnSide.Top;
                     X = random.Next(0, 800);
                     Y = (-1) * R;
                     break;
                 case 2:
+                    spawnside = SpawnSide.Right;
                     Y = random.Next(0, 600);
                     X = 800 + R;
                     break;
                 case 3:
+                    spawnside = SpawnSide.Bottom;
                     X = random.Next(0, 800);
                     Y = 600 + R;
                     break;
                 case 4:
+                    spawnside = SpawnSide.Left;
                     Y = random.Next(0, 600);
                     X = (-1) * R;
                     break;
             }
-            Duck duckie = new Duck(X, Y, R);
+            Duck duckie = new Duck(X, Y, R, spawnside);
             _ducks.Add(duckie);
         }
         private void CheckShooting()

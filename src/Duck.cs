@@ -45,6 +45,30 @@ namespace MyGame.src
             DuckLoad();
 
         }
+
+        public Duck(float x, float y, int radius, SpawnSide side) : this(x,y,radius)
+        {
+            Random random = new Random();
+            switch (side)
+            {
+                case SpawnSide.Top:
+                    _vel.X = random.Next(-5, 5);
+                    _vel.Y = random.Next(1, 5);
+                    break;
+                case SpawnSide.Right:
+                    _vel.X = random.Next(1, 5);
+                    _vel.Y = random.Next(-5, 5);
+                    break;
+                case SpawnSide.Left:
+                    _vel.X = random.Next(-5, -1);
+                    _vel.Y = random.Next(-5, 5);
+                    break;
+                case SpawnSide.Bottom:
+                    _vel.X = random.Next(-5, 5);
+                    _vel.Y = random.Next(-5, -1);
+                    break;
+            }
+        }
         //Properties
         public int Radius { set => _rad = value; get => _rad; }
 
