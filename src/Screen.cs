@@ -25,11 +25,8 @@ namespace MyGame.src
         //constructors
         public Screen()
         {
-            _screentype = ScreenType.Title;
-            _drawing = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
-            _saveddrawing = null;
-            _ship = null;
-            _ducks = null;
+            _screentype = ScreenType.Game;
+            InitializeGame();
         }
         //properties
         public Bitmap Background { get => _drawing.Background; }
@@ -37,41 +34,94 @@ namespace MyGame.src
         //methods
         public void Draw()
         {
-
-        }
-        public void InitializeGame()
-        {
-
-        }
-        public void InitializeTitle()
-        {
-
-        }
-        public void InitializeGOver()
-        {
-
-        }
-        public void InitializePause()
-        {
-
+            _drawing.Draw();
+            if (IsPlaying)
+            {
+                _ship.Draw();
+                _ship.Shoot();
+                foreach (Duck d in _ducks)
+                {
+                    d.DrawDuckAnimation();
+                }
+            }
         }
         public void ProcessInput()
         {
-
+            switch (_screentype)
+            {
+                case ScreenType.Game:
+                    ProcessGame();
+                    break;
+                case ScreenType.Title:
+                    ProcessTitle();
+                    break;
+                case ScreenType.GOver:
+                    ProcessGOver();
+                    break;
+                case ScreenType.Pause:
+                    ProcessPause();
+                    break;
+            }
         }
-        public void ProcessGame()
+        private void InitializeGame()
+        {
+            Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
+            _drawing = temp;
+            _saveddrawing = temp;
+            _ship = new Ship();
+            _ducks = new List<Duck>();
+
+            _ducks.Add(new Duck(100, 100, 50));
+        }
+        private void InitializeTitle()
+        {
+            _drawing = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
+            _saveddrawing = null;
+            _ship = null;
+            _ducks = null;
+        }
+        private void InitializeGOver()
         {
 
         }
-        public void ProcessTitle()
+        private void InitializePause()
         {
 
         }
-        public void ProcessGOver()
+        private void ProcessGame()
+        {
+            //need to add condition for when ship is hit/dead
+            if (SwinGame.KeyDown(KeyCode.vk_RIGHT))
+            {
+                _ship.X += 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_LEFT))
+            {
+                _ship.X -= 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_UP))
+            {
+                _ship.Y -= 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.KeyDown(KeyCode.vk_DOWN))
+            {
+                _ship.Y += 1;
+                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
+            }
+            if (SwinGame.MouseClicked(MouseButton.LeftButton)) { _ship.AddBullet(); }
+        }
+        private void ProcessTitle()
         {
 
         }
-        public void ProcessPause()
+        private void ProcessGOver()
+        {
+
+        }
+        private void ProcessPause()
         {
 
         }
