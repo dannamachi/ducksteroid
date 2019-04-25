@@ -10,13 +10,14 @@ namespace MyGame.src
         private Point2D _position = new Point2D();
 
         //Constructors
-        public Bullet (Color clr, float x, float y, int radius) : base (clr)
+        public Bullet (Color clr, Point2D position, Vector direction, int radius, int critangle) : base (clr)
         {
             _radius = radius;
-            _position.X = x;
-            _position.Y = y;
+            _position = position;
+            _velocity.X = direction.X * 5 * (float)Math.Cos (Math.PI * critangle / 180);
+            _velocity.Y = direction.Y * 5 * (float)Math.Sin (Math.PI * critangle / 180);
         }
-        public Bullet () : this (Color.White,0,0, 3)
+        public Bullet (Point2D position, Vector direction, int critangle) : this (Color.White, position, direction, 3, critangle)
         {
         }
 
@@ -32,9 +33,8 @@ namespace MyGame.src
         public override bool IsAt (Point2D pt) => SwinGame.PointInCircle (pt, X, Y, Radius);
 
         //Bullet move
-        public void Move (float x, float y)
+        public void Move ()
         {
-            _velocity.Y = -5;
             _position = SwinGame.AddVectors (_position, _velocity);
         }
     }
