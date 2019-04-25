@@ -28,6 +28,7 @@ namespace MyGame.src
         private Drawing _saveddrawing;
         private Ship _ship;
         private List<Duck> _ducks;
+        private bool _isdead;
 
         //constructors
         public Screen()
@@ -35,13 +36,22 @@ namespace MyGame.src
             _screentype = ScreenType.Game;
             InitializeGame();
         }
+
         //properties
         public Bitmap Background { get => _drawing.Background; }
         public bool IsPlaying { get => _screentype == ScreenType.Game; }
+        public bool IsDead { get => _isdead; }
+
         //methods
         public void Draw()
         {
             _drawing.Draw();
+
+            Text test = new Text (Color.Red, _ship.CenterCoord, SwinGame.LoadFont ("Arial", 20));
+            test.X = 500;
+            test.Y = 500;
+            test.Draw ();
+
             if (IsPlaying)
             {
                 _ship.Draw();
@@ -50,6 +60,10 @@ namespace MyGame.src
                 {
                     d.DrawDuckAnimation();
                 }
+                if (!IsDead) {
+                    _ship.Draw ();
+                }
+                _ship.Shoot ();
             }
         }
         public void ProcessInput()
@@ -74,30 +88,10 @@ namespace MyGame.src
         {
             if (IsPlaying)
             {
-                List<Bullet> removebullet = new List<Bullet>();
-                foreach (Bullet bu in _ship.Bullets)
-                {
-                    if (!Contain(bu.Position, bu.Radius))
-                        removebullet.Add(bu);
-                }
-                foreach (Bullet bu in removebullet)
-                {
-                    _ship.Bullets.Remove(bu);
-                }
-
-                List<Duck> removeduck = new List<Duck>();
-                foreach (Duck d in _ducks)
-                {
-                    d.MoveDuck();
-                    if (!(d.Exist && Contain(d.Position, d.Radius)))
-                        removeduck.Add(d);
-                }
-                foreach (Duck d in removeduck)
-                {
-                    _ducks.Remove(d);
-                }
-
+                _ship.Update ();
+                CheckOutobound ();
                 CheckShooting();
+                _isdead = CheckDead ();
             }
         }
         private void SpawnDuck()
@@ -134,6 +128,8 @@ namespace MyGame.src
             Duck duckie = new Duck(X, Y, R, spawnside);
             _ducks.Add(duckie);
         }
+
+        //Check everything while playing game
         private void CheckShooting()
         {
             List<Bullet> removebullet = new List<Bullet>();
@@ -153,6 +149,36 @@ namespace MyGame.src
                 _ship.Bullets.Remove(bu);
             }
         }
+        private void CheckOutobound ()
+        {
+            List<Bullet> removebullet = new List<Bullet> ();
+            foreach (Bullet bu in _ship.Bullets) {
+                if (!Contain (bu.Position, bu.Radius))
+                    removebullet.Add (bu);
+            }
+            foreach (Bullet bu in removebullet) {
+                _ship.Bullets.Remove (bu);
+            }
+
+            List<Duck> removeduck = new List<Duck> ();
+            foreach (Duck d in _ducks) {
+                d.MoveDuck ();
+                if (!(d.Exist && Contain (d.Position, d.Radius)))
+                    removeduck.Add (d);
+            }
+            foreach (Duck d in removeduck) {
+                _ducks.Remove (d);
+            }
+        }
+        private bool CheckDead ()
+        {
+            foreach(Duck d in _ducks) {
+                if (_ship.IsAt (d.Position))
+                    return true;
+            }
+            return false;
+        }
+
         private bool Contain(Point2D pt, int rad)
         {
             float X = pt.X;
@@ -165,13 +191,17 @@ namespace MyGame.src
                 return false;
             return true;
         }
+
+        //Initialize everything while playing game
         private void InitializeGame()
         {
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
             _drawing = temp;
             _saveddrawing = temp;
-            _ship = new Ship(Color.White,400,300);
+            _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
+            _isdead = false;
+
         }
         private void InitializeTitle()
         {
@@ -188,44 +218,28 @@ namespace MyGame.src
         {
 
         }
+
+        //The process of game
         private void ProcessGame()
         {
-            //need to add condition for when ship is hit/dead
-            if (SwinGame.KeyDown(KeyCode.vk_RIGHT))
-            {
-                Point2D shipcenter = _ship.TriangleShip.Barycenter();
-                shipcenter.X += 1;
-                if (Contain(shipcenter, 7))
-                    _ship.X += 1;
-                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
-            }
-            if (SwinGame.KeyDown(KeyCode.vk_LEFT))
-            {
-                Point2D shipcenter = _ship.TriangleShip.Barycenter();
-                shipcenter.X -= 1;
-                if (Contain(shipcenter, 7))
-                    _ship.X -= 1;
-                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
-            }
-            if (SwinGame.KeyDown(KeyCode.vk_UP))
-            {
-                Point2D shipcenter = _ship.TriangleShip.Barycenter();
-                shipcenter.Y -= 1;
-                if (Contain(shipcenter, 7))
-                    _ship.Y -= 1;
-                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
-            }
-            if (SwinGame.KeyDown(KeyCode.vk_DOWN))
-            {
-                Point2D shipcenter = _ship.TriangleShip.Barycenter();
-                shipcenter.Y += 1;
-                if (Contain(shipcenter, 7))
-                    _ship.Y += 1;
-                _ship.TriangleShip = SwinGame.CreateTriangle(_ship.X, _ship.Y, _ship.X - 15, _ship.Y + 20, _ship.X + 15, _ship.Y + 20);
-            }
-            if (SwinGame.MouseClicked(MouseButton.LeftButton)) { _ship.AddBullet(); }
+            if (!IsDead) {
+                //need to add condition for when ship is hit/dead
+                if (SwinGame.KeyDown (KeyCode.vk_d)) {
+                    _ship.IncreaseAngle ();
+                }
+                if (SwinGame.KeyDown (KeyCode.vk_a)) {
+                    _ship.DecreaseAngle ();
+                }
+                if (SwinGame.KeyDown (KeyCode.vk_w)) {
+                    _ship.MoveUp ();
+                }
+                if (SwinGame.KeyDown (KeyCode.vk_s)) {
+                    _ship.MoveDown ();
+                }
+                if (SwinGame.MouseClicked (MouseButton.LeftButton)) { _ship.AddBullet (); }
 
-            if (SwinGame.KeyTyped(KeyCode.vk_SPACE)) { SpawnDuck(); }
+                if (SwinGame.KeyTyped (KeyCode.vk_SPACE)) { SpawnDuck (); }
+            }
         }
         private void ProcessTitle()
         {
