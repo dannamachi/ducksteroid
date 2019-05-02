@@ -29,6 +29,7 @@ namespace MyGame.src
         private Ship _ship;
         private List<Duck> _ducks;
         private bool _isdead;
+        private Timer _timer;
 
         //constructors
         public Screen()
@@ -64,7 +65,10 @@ namespace MyGame.src
                     _ship.Draw ();
                 }
                 _ship.Shoot ();
+
+                _timer.StartTimer ();
             }
+
         }
         public void ProcessInput()
         {
@@ -201,6 +205,7 @@ namespace MyGame.src
             _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
             _isdead = false;
+            _timer = new Timer ();
 
         }
         private void InitializeTitle()
