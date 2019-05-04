@@ -68,5 +68,17 @@ namespace MyGame.src
             if (s != null)
                 _shapes.Add(s);
         }
+
+        public Text GetButton(string s)
+        {
+            foreach (Shape sh in _shapes)
+            {
+                if (sh is Text)
+                {
+                    if ((sh as Text).Content == s) { return sh as Text; }
+                }
+            }
+            return null;
+        }
     }
 }

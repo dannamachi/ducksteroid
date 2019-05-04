@@ -31,11 +31,13 @@ namespace MyGame.src
         private bool _isdead;
         private Timer _timer;
 
+
         //constructors
         public Screen()
         {
-            _screentype = ScreenType.Game;
-            InitializeGame();
+            _screentype = ScreenType.Title;
+            InitializeTitle();
+           
         }
 
         //properties
@@ -201,6 +203,7 @@ namespace MyGame.src
         {
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
             _drawing = temp;
+            
             _saveddrawing = temp;
             _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
@@ -210,10 +213,24 @@ namespace MyGame.src
         }
         private void InitializeTitle()
         {
-            _drawing = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
-            _saveddrawing = null;
+            Drawing inital = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
+            Text play = new Text(Color.Yellow, "Play", SwinGame.LoadFont("Arial", 20));
+            Text exit = new Text(Color.Yellow, "Exit", SwinGame.LoadFont("Arial", 20));
+            play.X = 340;
+            play.Y = 290;
+            play.Height = 50;
+            play.Width = 170;
+            exit.X = 340;
+            exit.Y = 380;
+            exit.Width = 170;
+            exit.Height = 50;
+            _drawing = inital;
+            _drawing.AddShape(play);
+            _drawing.AddShape(exit);
+            _saveddrawing = inital;
             _ship = null;
             _ducks = null;
+
         }
         private void InitializeGOver()
         {
@@ -248,7 +265,19 @@ namespace MyGame.src
         }
         private void ProcessTitle()
         {
+            Point2D _play = new Point2D();
+            _play.X = 340;
+            _play.Y = 290;
 
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                _drawing.SelectShapesAt(_play);
+                if (_drawing.GetButton("Play").Selected)
+                {
+                    _screentype = ScreenType.Game;
+                    InitializeGame();
+                }
+            }
         }
         private void ProcessGOver()
         {
