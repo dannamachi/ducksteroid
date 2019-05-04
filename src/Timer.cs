@@ -5,6 +5,7 @@ namespace MyGame.src
 {
     public class Timer
     {
+        private int _lastcalled;
         private int _min, _sec, _tick;
         private Text t;
 
@@ -16,9 +17,12 @@ namespace MyGame.src
             _tick = 58;
             Font font = new Font ("arial.ttf", 20);
             t = new Text (Color.White, "02:30", font);
+            _lastcalled = TimeInSec;
         }
 
         //Properties
+        public int LastCalledSec { get => _lastcalled; set => _lastcalled = value; }
+        public int TimeInSec { get { return _min * 60 + _sec; } }
         public int Min { get => _min; }
         public int Sec { get => _sec; }
 

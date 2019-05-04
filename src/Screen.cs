@@ -31,7 +31,6 @@ namespace MyGame.src
         private bool _isdead;
         private Timer _timer;
 
-
         //constructors
         public Screen()
         {
@@ -97,13 +96,14 @@ namespace MyGame.src
                 CheckOutobound ();
                 CheckShooting();
                 _isdead = CheckDead ();
+                if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { SpawnDuck(); _timer.LastCalledSec = _timer.TimeInSec; }
             }
         }
         private void SpawnDuck()
         {
             Random random = new Random();
             int spawnrand = random.Next(1, 4);
-            int R = random.Next(10, 30);
+            int R = 29;
             float X = (-1) * 2 * R;
             float Y = X;
             SpawnSide spawnside = SpawnSide.Top;
@@ -259,7 +259,6 @@ namespace MyGame.src
                 }
                 if (SwinGame.MouseClicked (MouseButton.LeftButton)) { _ship.AddBullet (); }
 
-                if (SwinGame.KeyTyped (KeyCode.vk_SPACE)) { SpawnDuck (); }
             }
         }
         private void ProcessTitle()
