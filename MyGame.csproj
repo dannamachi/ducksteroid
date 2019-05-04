@@ -67,6 +67,7 @@
     <Compile Include="src\Shape.cs" />
     <Compile Include="src\Ship.cs" />
     <Compile Include="src\Text.cs" />
+    <Compile Include="src\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">

@@ -50,13 +50,12 @@ namespace MyGame.src
         {
             _drawing.Draw();
 
-            Text test = new Text (Color.Red, _ship.CenterCoord, SwinGame.LoadFont ("Arial", 20));
-            test.X = 500;
-            test.Y = 500;
-            test.Draw ();
-
             if (IsPlaying)
             {
+                Text test = new Text(Color.Red, _ship.CenterCoord, SwinGame.LoadFont("Arial", 20));
+                test.X = 500;
+                test.Y = 500;
+                test.Draw();
                 _ship.Draw();
                 _ship.Shoot();
                 foreach (Duck d in _ducks)
