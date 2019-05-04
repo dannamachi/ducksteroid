@@ -92,11 +92,17 @@ namespace MyGame.src
         {
             if (IsPlaying)
             {
-                _ship.Update ();
+                _isdead = CheckDead ();
+                if(!_isdead){
+                    _ship.Update ();
                 CheckOutobound ();
                 CheckShooting();
-                _isdead = CheckDead ();
-                if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { SpawnDuck(); _timer.LastCalledSec = _timer.TimeInSec; }
+                
+                if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
+                    SpawnDuck(); 
+                    _timer.LastCalledSec = _timer.TimeInSec; 
+                }
+                }
             }
         }
         private void SpawnDuck()
@@ -178,8 +184,11 @@ namespace MyGame.src
         private bool CheckDead ()
         {
             foreach(Duck d in _ducks) {
-                if (_ship.IsAt (d.Position))
-                    return true;
+                foreach(Point2D p in _ship.Positions) {
+                    if (d.IsAt(p)){
+                        return true;
+                    }
+                }
             }
             return false;
         }

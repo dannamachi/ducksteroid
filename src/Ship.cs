@@ -34,6 +34,16 @@ namespace MyGame.src
         public List<Bullet> Bullets { get => _bullets; }
         public int Angle { get => _angle; }
         public string CenterCoord { get => _center.X.ToString () + "-" + _center.Y.ToString (); }
+        public List<Point2D> Positions {
+            get {
+                List<Point2D> p = new List<Point2D>();
+                p.Add(_p1);
+                p.Add(_p2);
+                p.Add(_p3);
+                return p;
+            }
+        }
+
         public Vector Direction {
             get {
                 Vector direction = new Vector ();
@@ -52,7 +62,9 @@ namespace MyGame.src
 
         //Methods
         //Draw the the ship
-        public override void Draw () => SwinGame.FillTriangle(Color, TriangleShip);
+        public override void Draw ()  {
+            SwinGame.FillTriangle(Color, TriangleShip);
+        }
 
         //If something touches within the ship's area
         public override bool IsAt (Point2D pt) => SwinGame.PointInTriangle (pt, TriangleShip);
