@@ -30,10 +30,12 @@ namespace MyGame.src
         private List<Duck> _ducks;
         private bool _isdead;
         private Timer _timer;
+        private bool _isQuit;
 
         //constructors
         public Screen()
         {
+            _isQuit = false;
             _screentype = ScreenType.Title;
             InitializeTitle();
            
@@ -43,7 +45,7 @@ namespace MyGame.src
         public Bitmap Background { get => _drawing.Background; }
         public bool IsPlaying { get => _screentype == ScreenType.Game; }
         public bool IsDead { get => _isdead; }
-
+        public bool IsQuit { get => _isQuit; set => _isQuit = value; }
         //methods
         public void Draw()
         {
@@ -263,17 +265,20 @@ namespace MyGame.src
         }
         private void ProcessTitle()
         {
-            Point2D _play = new Point2D();
-            _play.X = 340;
-            _play.Y = 290;
-
+            Point2D click = new Point2D();
+            click.X = SwinGame.MouseX();
+            click.Y = SwinGame.MouseY();
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
-                _drawing.SelectShapesAt(_play);
+                _drawing.SelectShapesAt(click);
                 if (_drawing.GetButton("Play").Selected)
                 {
                     _screentype = ScreenType.Game;
                     InitializeGame();
+                }
+                else if (_drawing.GetButton("Exit").Selected)
+                {
+                    _isQuit = true;
                 }
             }
         }
