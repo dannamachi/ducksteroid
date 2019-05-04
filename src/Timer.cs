@@ -1,0 +1,54 @@
+﻿using System.Threading;
+using SwinGameSDK;
+
+namespace MyGame.src
+{
+    public class Timer
+    {
+        private int _min, _sec, _tick;
+        private Text t;
+
+        //Constructors
+        public Timer ()
+        {
+            _min = 2;
+            _sec = 30;
+            _tick = 58;
+            Font font = new Font ("arial.ttf", 20);
+            t = new Text (Color.White, "02:30", font);
+        }
+
+        //Properties
+        public int Min { get => _min; }
+        public int Sec { get => _sec; }
+
+        //Methods
+        public void StartTimer ()
+        {
+            t.Draw ();
+
+            //Timer Logic
+            if(_sec == 0 && _min == 0 && _tick == 1) {
+                _min = _sec = _tick = 0;
+            } else {
+                _tick--;
+                if (_tick == 0) {
+                    _sec--;
+                    _tick = 58;
+                }
+                if (_sec == 0 && _min != 0) {
+                    _min--;
+                    _sec = 60;
+                }
+            }
+
+            //Format String of Timer
+            if(_sec < 10) {
+                t.Content = string.Format ("0{0}:0{1}", _min, _sec);
+            } else {
+                t.Content = string.Format ("0{0}:{1}", _min, _sec);
+            }
+            
+        }
+    }
+}
