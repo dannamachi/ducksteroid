@@ -103,7 +103,7 @@ namespace MyGame.src
         {
             Random random = new Random();
             int spawnrand = random.Next(1, 4);
-            int R = random.Next(10, 30);
+            int R = 29;
             float X = (-1) * 2 * R;
             float Y = X;
             SpawnSide spawnside = SpawnSide.Top;

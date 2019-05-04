@@ -104,7 +104,7 @@ namespace MyGame.src
 
         public bool IsAt (Point2D pt)
         {
-            return SwinGame.PointInCircle(pt, _pos.X, _pos.Y, _rad);
+            return SwinGame.PointInCircle(pt, _pos.X + _rad, _pos.Y + _rad, _rad);
         }
 
         public Bitmap LeftDuck { get => leftDuck; }
