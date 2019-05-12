@@ -1,13 +1,10 @@
 ﻿using NUnit.Framework;
 using System;
-namespace MyGame
+namespace MyGame.src
 {
     [TestFixture ()]
     public class TimerTest
     {
-        [Test ()]
-        public void TestCase ()
-        {
-        }
+
     }
 }
