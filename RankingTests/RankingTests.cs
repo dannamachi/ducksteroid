@@ -7,6 +7,7 @@ namespace Tests
 {
     public class RankingTests
     {
+        //set-up method to return a ranking obj with 4 scores in it
         public Ranking Setup()
         {
             Ranking rank = new Ranking();
@@ -21,6 +22,8 @@ namespace Tests
             return rank;
         }
 
+        //test: add score to a ranking obj
+        //expected: contain the score added (true)
         [Test]
         public void TestAddScore()
         {
@@ -33,13 +36,38 @@ namespace Tests
             bool actual = rank.Scores.Contains(score2);
             Assert.AreEqual(true, actual, "Test ranking can add score");
         }
+        //test: check if file can be loaded from
+        //expected: file is missing so cannot load (false)
         [Test]
-        public void TestLoadFileFalse()
+        public void TestCheckFileMissing()
         {
             Ranking rank = new Ranking();
-            StreamReader actual = rank.LoadFile("scorenope.txt");
-            Assert.IsNull(actual, "Test ranking can load score from file");
+            bool actual = rank.CheckFile("scorenope.txt");
+
+            Assert.AreEqual(false, actual, "Test ranking can detect missing file");
         }
+        //test: check if file can be loaded from
+        //expected: file has more than 11 lines so cannot load (false)
+        [Test]
+        public void TestCheckFileValid1()
+        {
+            Ranking rank = new Ranking();
+            bool actual = rank.CheckFile("scoreover11.txt");
+
+            Assert.AreEqual(false, actual, "Test ranking can check for file validity");
+        }
+        //test: check if file can be loaded from
+        //expected: file has non-digit chars so cannot load (false)
+        [Test]
+        public void TestCheckFileValid2()
+        {
+            Ranking rank = new Ranking();
+            bool actual = rank.CheckFile("scorenondigit.txt");
+
+            Assert.AreEqual(false, actual, "Test ranking can check for file validity");
+        }
+        //test: check if ranking obj can read file content, line by line
+        //expected: concatenated string of first 3 lines of file 
         [Test]
         public void TestGetContentFromFile()
         {
@@ -55,6 +83,8 @@ namespace Tests
             }
             Assert.AreEqual("22015", actual, "Test ranking can print file content");
         }
+        //test: check if file is saved correctly
+        //expected: number of scores in the ranking obj 
         [Test]
         public void TestSaveFile1()
         {
@@ -62,8 +92,11 @@ namespace Tests
             rank.SaveFile("scores.txt");
             StreamReader reader = new StreamReader("scores.txt");
             int actual = Convert.ToInt32(reader.ReadLine());
-            Assert.AreEqual(2, actual, "Test ranking can save to file");
+            int num = rank.Scores.Length;
+            Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
+        //test: check if file is saved correctly
+        //expected: value of 2nd score from top
         [Test]
         public void TestSaveFile2()
         {
@@ -73,8 +106,11 @@ namespace Tests
             reader.ReadLine();
             reader.ReadLine();
             int actual = Convert.ToInt32(reader.ReadLine());
-            Assert.AreEqual(15, actual, "Test ranking can save to file");
+            int num = rank.Scores[1].Value;
+            Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
+        //test: check if ranking obj can sort score objs by value
+        //expected: list of scores is sorted (true)
         [Test]
         public void TestSort()
         {
@@ -90,6 +126,8 @@ namespace Tests
             }
             Assert.AreEqual(true, actual, "Test ranking can sort scores");
         }
+        //test: check if ranking obj can remove and sort when there are more than 10 scores
+        //expected: 10 scores after adding and list of scores is sorted (true)
         [Test]
         public void TestCheckScoreCount()
         {
