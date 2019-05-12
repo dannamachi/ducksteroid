@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using MyGame.src;
 
 namespace Tests
 {
@@ -27,13 +28,11 @@ namespace Tests
         [Test]
         public void TestAddScore()
         {
-            Ranking rank = new Ranking();
+            Ranking rank = Setup();
             Score score1 = new Score("ducktrial1", 20);
-            Score score2 = new Score("ducktrial2", 15);
             rank.AddScore(score1);
-            rank.AddScore(score2);
+            bool actual = rank.Scores.Contains(score1);
 
-            bool actual = rank.Scores.Contains(score2);
             Assert.AreEqual(true, actual, "Test ranking can add score");
         }
         //test: check if file can be loaded from
@@ -92,7 +91,7 @@ namespace Tests
             rank.SaveFile("scores.txt");
             StreamReader reader = new StreamReader("scores.txt");
             int actual = Convert.ToInt32(reader.ReadLine());
-            int num = rank.Scores.Length;
+            int num = rank.Scores.Count;
             Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
         //test: check if file is saved correctly
@@ -117,9 +116,9 @@ namespace Tests
             Ranking rank = Setup();
             rank.Sort();
             bool actual = true;
-            for (int i = 0; i < rank.Scores.Length; i++)
+            for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Length; i++)
+                for (int j = i + 1; j < rank.Scores.Count; j++)
                 {
                     if (rank.Scores[i].Value > rank.Scores[j].Value) { actual = false; break; }
                 }
@@ -142,11 +141,11 @@ namespace Tests
             rank.AddScore(score2);
             rank.AddScore(score3);
             rank.AddScore(score2);
-            int num = rank.Scores.Length;
+            int num = rank.Scores.Count;
             bool sorted = true;
-            for (int i = 0; i < rank.Scores.Length; i++)
+            for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Length; i++)
+                for (int j = i + 1; j < rank.Scores.Count; j++)
                 {
                     if (rank.Scores[i].Value > rank.Scores[j].Value) { sorted = false; break; }
                 }
