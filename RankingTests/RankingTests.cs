@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
 using System;
 using MyGame.src;
 
@@ -72,7 +71,6 @@ namespace Tests
         {
             Ranking rank = new Ranking();
             rank.LoadFile("scores.txt");
-            rank.LoadFile("scores.txt");
             string line = rank.GetLine();
             string actual = "";
             while (line != null)
@@ -89,8 +87,9 @@ namespace Tests
         {
             Ranking rank = Setup();
             rank.SaveFile("scores.txt");
-            StreamReader reader = new StreamReader("scores.txt");
-            int actual = Convert.ToInt32(reader.ReadLine());
+            rank.LoadFile("scores.txt");
+            string line = rank.GetLine();
+            int actual = Convert.ToInt32(line.TrimEnd());
             int num = rank.Scores.Count;
             Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
@@ -101,10 +100,10 @@ namespace Tests
         {
             Ranking rank = Setup();
             rank.SaveFile("scores.txt");
-            StreamReader reader = new StreamReader("scores.txt");
-            reader.ReadLine();
-            reader.ReadLine();
-            int actual = Convert.ToInt32(reader.ReadLine());
+            rank.LoadFile("scores.txt");
+            rank.GetLine();
+            rank.GetLine();
+            int actual = Convert.ToInt32(rank.GetLine().TrimEnd());
             int num = rank.Scores[1].Value;
             Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
@@ -118,9 +117,13 @@ namespace Tests
             bool actual = true;
             for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Count; j++)
+                if (i > 0)
                 {
-                    if (rank.Scores[i].Value > rank.Scores[j].Value) { actual = false; break; }
+                    if (rank.Scores[i] > rank.Scores[i - 1]) { actual = false; break; }
+                }
+                if (i < rank.Scores.Count - 1)
+                {
+                    if (rank.Scores[i] < rank.Scores[i + 1]) { actual = false; break; }
                 }
             }
             Assert.AreEqual(true, actual, "Test ranking can sort scores");
@@ -142,15 +145,8 @@ namespace Tests
             rank.AddScore(score3);
             rank.AddScore(score2);
             int num = rank.Scores.Count;
-            bool sorted = true;
-            for (int i = 0; i < rank.Scores.Count; i++)
-            {
-                for (int j = i + 1; j < rank.Scores.Count; j++)
-                {
-                    if (rank.Scores[i].Value > rank.Scores[j].Value) { sorted = false; break; }
-                }
-            }
-            bool actual = (num == 10) && sorted;
+
+            bool actual = (num == 10);
             Assert.AreEqual(true, actual, "Test ranking can add score with score count above 10");
         }
     }
