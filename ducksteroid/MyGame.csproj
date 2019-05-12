@@ -61,6 +61,7 @@
     <Compile Include="src\Bullet.cs" />
     <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Ranking.cs" />
     <Compile Include="src\Screen.cs" />
     <Compile Include="src\Drawing.cs" />
     <Compile Include="src\Rectangle.cs" />

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using MyGame.src;
 
 namespace Tests
 {
@@ -73,7 +74,6 @@ namespace Tests
         {
             Ranking rank = new Ranking();
             rank.LoadFile("scores.txt");
-            rank.LoadFile("scores.txt");
             string line = rank.GetLine();
             string actual = "";
             while (line != null)
@@ -92,7 +92,7 @@ namespace Tests
             rank.SaveFile("scores.txt");
             StreamReader reader = new StreamReader("scores.txt");
             int actual = Convert.ToInt32(reader.ReadLine());
-            int num = rank.Scores.Length;
+            int num = rank.Scores.Count;
             Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
         //test: check if file is saved correctly
@@ -117,11 +117,11 @@ namespace Tests
             Ranking rank = Setup();
             rank.Sort();
             bool actual = true;
-            for (int i = 0; i < rank.Scores.Length; i++)
+            for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Length; i++)
+                for (int j = i + 1; j < rank.Scores.Count; j++)
                 {
-                    if (rank.Scores[i].Value > rank.Scores[j].Value) { actual = false; break; }
+                    if (rank.Scores[i].Value < rank.Scores[j].Value) { actual = false; break; }
                 }
             }
             Assert.AreEqual(true, actual, "Test ranking can sort scores");
@@ -142,13 +142,13 @@ namespace Tests
             rank.AddScore(score2);
             rank.AddScore(score3);
             rank.AddScore(score2);
-            int num = rank.Scores.Length;
+            int num = rank.Scores.Count;
             bool sorted = true;
-            for (int i = 0; i < rank.Scores.Length; i++)
+            for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Length; i++)
+                for (int j = i + 1; j < rank.Scores.Count; j++)
                 {
-                    if (rank.Scores[i].Value > rank.Scores[j].Value) { sorted = false; break; }
+                    if (rank.Scores[i].Value < rank.Scores[j].Value) { sorted = false; break; }
                 }
             }
             bool actual = (num == 10) && sorted;
