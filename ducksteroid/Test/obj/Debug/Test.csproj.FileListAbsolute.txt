@@ -1,0 +1,9 @@
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/bin/Debug/Test.dll
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/bin/Debug/Test.pdb
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/bin/Debug/nunit.framework.dll
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/bin/Debug/nunit.framework.xml
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/obj/Debug/Test.csprojAssemblyReference.cache
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/obj/Debug/Test.csproj.CoreCompileInputs.cache
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/obj/Debug/Test.csproj.CopyComplete
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/obj/Debug/Test.dll
+/Users/peterdu/MyStudy/Year2/Semester1(2019)/SWE20001/HDProject/ducksteroid/ducksteroid/Test/obj/Debug/Test.pdb
