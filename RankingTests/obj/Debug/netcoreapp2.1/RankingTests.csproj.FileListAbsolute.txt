@@ -1,0 +1,4 @@
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\RankingTests\obj\Debug\netcoreapp2.1\RankingTests.csprojAssemblyReference.cache
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\RankingTests\obj\Debug\netcoreapp2.1\RankingTests.csproj.CoreCompileInputs.cache
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\RankingTests\obj\Debug\netcoreapp2.1\RankingTests.AssemblyInfoInputs.cache
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\RankingTests\obj\Debug\netcoreapp2.1\RankingTests.AssemblyInfo.cs

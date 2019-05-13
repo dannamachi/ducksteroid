@@ -110,7 +110,7 @@ namespace MyGame.src
 
             }
 
-        }
+        
         public void ProcessInput()
         {
             switch (_screentype)
