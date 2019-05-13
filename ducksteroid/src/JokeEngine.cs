@@ -22,14 +22,17 @@ namespace MyGame.src
         private static string _fileName = "jokes.txt";
         private static Joke _joke = new Joke();
         //properties
+        public static Joke Joke { get => _joke; }
+        public static int JokeCount { get => _jokes.Count; }
         //methods
-        public static Joke ReadJoke (StreamReader reader)
+        private static Joke ReadJoke (StreamReader reader)
         {
             string line = reader.ReadLine().TrimEnd();
             Joke joke = new Joke();
             while (line != "?")
             {
                 joke.AddLine(line);
+                line = reader.ReadLine().TrimEnd();
             }
             return joke;
         }
@@ -75,6 +78,7 @@ namespace MyGame.src
         public static void GetJoke()
         {
             _count += 1;
+            if (_count == _jokes.Count) { _count = 0; }
             _joke = _jokes[_count];
         }
     }

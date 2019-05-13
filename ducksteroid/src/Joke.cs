@@ -24,6 +24,11 @@ namespace MyGame.src
         public Joke() : this (new string[] { },0,0) { }
         //properties
         //methods
+        public string GetLine(int index)
+        {
+            if (0 <= index && index < _texts.Count) { return _texts[index]; }
+            return "Nothing here~";
+        }
         public void AddLine(string st)
         {
             _texts.Add(st);
