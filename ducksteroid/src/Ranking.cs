@@ -20,19 +20,31 @@ namespace MyGame.src
         //properties
         public List<Score> Scores { get => _scores; }
         //methods
-        public void SaveFile(string filepath)
+        public bool SaveScores(string filepath)
         {
-            StreamReader
+            StreamWriter writer;
+            try
+            {
+                writer = new StreamWriter(filepath);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            writer = new StreamWriter(filepath);
+            writer.WriteLine(_scores.Count);
             foreach (Score sc in _scores)
             {
-
+                writer.WriteLine(sc.Value);
             }
+            writer.Close();
+            return true;
         }
         public void LoadScores(string filepath)
         {
             if (CheckFile(filepath))
             {
-                LoadFile();
+                LoadFile(filepath);
                 string line = GetLine();
                 int num;
                 Score score;
@@ -43,10 +55,12 @@ namespace MyGame.src
                     _scores.Add(score);
                     line = GetLine();
                 }
+                _reader.Close();
             }
         }
         public string GetLine()
         {
+            if (_reader == null) { return null; }
             return _reader.ReadLine();
         }
         public void LoadFile(string filepath)

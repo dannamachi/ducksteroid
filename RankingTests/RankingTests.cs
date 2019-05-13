@@ -40,7 +40,7 @@ namespace Tests
         public void TestSaveFile1()
         {
             Ranking rank = Setup();
-            rank.SaveFile("scores.txt");
+            rank.SaveScores("scores.txt");
             rank.LoadFile("scores.txt");
             string line = rank.GetLine();
             int actual = Convert.ToInt32(line.TrimEnd());
@@ -53,7 +53,7 @@ namespace Tests
         public void TestSaveFile2()
         {
             Ranking rank = Setup();
-            rank.SaveFile("scores.txt");
+            rank.SaveScores("scores.txt");
             rank.LoadFile("scores.txt");
             rank.GetLine();
             rank.GetLine();
