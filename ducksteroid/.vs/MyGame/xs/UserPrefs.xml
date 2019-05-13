@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{871B5A90-103A-46A5-BBB9-07C02B9851D1}|Default">
+  <MonoDevelop.Ide.ItemProperties.MyGame PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Duck.cs">
+    <Files>
+      <File FileName="src/Bullet.cs" Line="1" Column="1" />
+      <File FileName="src/Ship.cs" Line="1" Column="1" />
+      <File FileName="src/Shape.cs" Line="1" Column="1" />
+      <File FileName="src/GameMain.cs" Line="1" Column="1" />
+      <File FileName="src/Rectangle.cs" Line="1" Column="1" />
+      <File FileName="src/Screen.cs" Line="1" Column="1" />
+      <File FileName="src/Duck.cs" Line="63" Column="27" />
+      <File FileName="src/Button.cs" Line="8" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MyGame" expanded="True">
+            <Node name="MyGame" expanded="True">
+              <Node name="src" expanded="True">
+                <Node name="Duck.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Mac|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
