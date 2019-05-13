@@ -11,7 +11,7 @@ namespace MyGame.src
         public void TestInitCounter ()
         {
             _count = new Counter ();
-            Assert.AreEqual (_count.Value, 0);
+            Assert.AreEqual (0, _count.Value);
         }
 
         [Test ()]
@@ -19,7 +19,7 @@ namespace MyGame.src
         {
             _count = new Counter ();
             _count.Increment ();
-            Assert.AreEqual (_count.Value, 1);
+            Assert.AreEqual (1, _count.Value);
         }
 
         [Test ()]
@@ -28,7 +28,7 @@ namespace MyGame.src
             _count = new Counter ();
             _count.Increment ();
             _count.Reset ();
-            Assert.AreEqual (_count.Value, 0);
+            Assert.AreEqual (0, _count.Value);
         }
     }
 }
