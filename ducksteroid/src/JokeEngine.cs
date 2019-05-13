@@ -17,45 +17,53 @@ namespace MyGame.src
     public static class JokeEngine
     {
         //fields
-        private static int _count;
-        private static List<Text> _jokes = new List<Text>();
+        private static int _count = 0;
+        private static List<Joke> _jokes = new List<Joke>();
         private static string _fileName = "jokes.txt";
-        private static Text _lastjoke = new Text();
-        private static Text _joke;
+        private static Joke _joke = new Joke();
         //properties
-        public static Text LastJoke { get => _lastjoke; }
         //methods
+        public static Joke ReadJoke (StreamReader reader)
+        {
+            string line = reader.ReadLine().TrimEnd();
+            Joke joke = new Joke();
+            while (line != "?")
+            {
+                joke.AddLine(line);
+            }
+            return joke;
+        }
         public static void LoadJokes()
         {
             Random rand = new Random();
             int posNum;
             StreamReader reader = new StreamReader(_fileName);
-            string line = reader.ReadLine();
-            while (line != null)
+            int num = Convert.ToInt32(reader.ReadLine().TrimEnd());
+            Joke joke;
+            for (int i = 0; i < num; i++)
             {
-                Text text = new Text(Color.Red, reader.ReadLine(), SwinGame.LoadFont("Arial", 30));
+                joke = ReadJoke(reader);
                 posNum = rand.Next(1, 4);
                 switch (posNum)
                 {
                     case 1:
-                        text.X = 100;
-                        text.Y = 75;
+                        joke.X = 100;
+                        joke.Y = 75;
                         break;
                     case 2:
-                        text.X = 500;
-                        text.Y = 75;
+                        joke.X = 500;
+                        joke.Y = 75;
                         break;
                     case 3:
-                        text.X = 100;
-                        text.Y = 375;
+                        joke.X = 100;
+                        joke.Y = 375;
                         break;
                     case 4:
-                        text.X = 500;
-                        text.Y = 375;
+                        joke.X = 500;
+                        joke.Y = 375;
                         break;
                 }
-                _jokes.Add(text);
-                line = reader.ReadLine();
+                _jokes.Add(joke);
             }
             reader.Close();
             _count = 0;
@@ -66,16 +74,8 @@ namespace MyGame.src
         }
         public static void GetJoke()
         {
-            Random rand = new Random();
-            int num = rand.Next(0, _jokes.Count - 1);
-            Text joke = _jokes[num];
-            while (joke == _lastjoke)
-            {
-                num = rand.Next(0, _jokes.Count - 1);
-                joke = _jokes[num];
-            }
-            _lastjoke = joke;
-            _joke = joke;
+            _count += 1;
+            _joke = _jokes[_count];
         }
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="src\Bullet.cs" />
     <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Joke.cs" />
     <Compile Include="src\JokeEngine.cs" />
     <Compile Include="src\Screen.cs" />
     <Compile Include="src\Drawing.cs" />
