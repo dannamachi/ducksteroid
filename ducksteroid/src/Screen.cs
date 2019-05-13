@@ -31,14 +31,14 @@ namespace MyGame.src
         private bool _isdead;
         private Timer _timer;
         private bool _isQuit;
+        private DrawPicture _picture;
 
         //constructors
         public Screen()
         {
             _isQuit = false;
             _screentype = ScreenType.Title;
-            InitializeTitle();
-           
+            InitializeTitle();    
         }
 
         //properties
@@ -46,13 +46,30 @@ namespace MyGame.src
         public bool IsPlaying { get => _screentype == ScreenType.Game; }
         public bool IsDead { get => _isdead; }
         public bool IsQuit { get => _isQuit; set => _isQuit = value; }
+        public Bitmap Picture { get => _picture.Image; }
+        public bool IsGO { get => _screentype == ScreenType.GOver; }
+        public bool IsPaused { get => _screentype == ScreenType.Pause; }
+   
+
+
         //methods
         public void Draw()
         {
             _drawing.Draw();
-
+        
             if (IsPlaying)
             {
+                Text words = new Text(Color.White, "||", SwinGame.LoadFont("Arial", 20));
+                words.X = 751;
+                words.Y = 13;
+                words.Width = 40;
+                words.Height = 30;
+                words.Draw();
+                _drawing.AddShape(words);
+                DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
+                pause.DrawIt();
+               
+
                 Text test = new Text(Color.Red, _ship.CenterCoord, SwinGame.LoadFont("Arial", 20));
                 test.X = 500;
                 test.Y = 500;
@@ -65,20 +82,19 @@ namespace MyGame.src
                 }
                 if (!IsDead) {
                     _ship.Draw ();
-                    _timer.StartTimer ();
+                   
                 }
+                
                 _ship.Shoot ();
 
                 _timer.LastCalledSec = _timer.TimeInSec;
                 _timer.StartTimer();
-
 
                 //draw joke every 4s
                 if (_timer.TimeInSec % 8 < 5)
                 {
                     JokeEngine.DrawJoke();
                 }
-
             }
             if (IsPaused)
             {
@@ -90,7 +106,6 @@ namespace MyGame.src
             {
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("GOscreen.png"), 100, 100);
                 A.DrawIt();
-
             }
 
         }
@@ -135,7 +150,14 @@ namespace MyGame.src
 
                     }
                 }
+                else
+                {
+                    _screentype = ScreenType.GOver;
+                    InitializeGOver();
+                }   
             }
+        
+
         }
         private void SpawnDuck()
         {
@@ -241,21 +263,26 @@ namespace MyGame.src
         //Initialize everything while playing game
         private void InitializeGame()
         {
-            Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
-            _drawing = temp;
+
+            _timer = new Timer();
             
+            Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
+
+            _drawing = temp;
+
             _saveddrawing = temp;
             _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
             _isdead = false;
-            _timer = new Timer ();
+            
 
             JokeEngine.LoadJokes();
 
         }
         private void InitializeTitle()
         {
-            Drawing inital = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
+            Drawing initial = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
+            initial.Draw();
             Text play = new Text(Color.Yellow, "Play", SwinGame.LoadFont("Arial", 20));
             Text exit = new Text(Color.Yellow, "Exit", SwinGame.LoadFont("Arial", 20));
             play.X = 340;
@@ -266,41 +293,95 @@ namespace MyGame.src
             exit.Y = 380;
             exit.Width = 170;
             exit.Height = 50;
-            _drawing = inital;
+            _drawing = initial;
             _drawing.AddShape(play);
             _drawing.AddShape(exit);
-            _saveddrawing = inital;
+            _drawing.Draw();
+            _saveddrawing = null;
             _ship = null;
             _ducks = null;
+
 
         }
         private void InitializeGOver()
         {
+            Text main = new Text(Color.Yellow, "Main", SwinGame.LoadFont("Arial", 20));
+            Text quit = new Text(Color.Yellow, "Quit", SwinGame.LoadFont("Arial", 20));
+
+            main.X = 167;
+            main.Y = 290;
+            main.Height = 50;
+            main.Width = 200;
+            quit.X = 430;
+            quit.Y = 290;
+            quit.Width = 190;
+            quit.Height = 50;
+            _drawing.AddShape(main);
+            _drawing.AddShape(quit);
+            _saveddrawing = null;
+            _ship = null;
+            _ducks = null;
 
         }
         private void InitializePause()
         {
-
+            Text resume = new Text(Color.Yellow, "Resume", SwinGame.LoadFont("Arial", 20));
+            Text main = new Text(Color.Yellow, "Main", SwinGame.LoadFont("Arial", 20));
+       
+            resume.X = 220;
+            resume.Y = 300;
+            resume.Height = 50;
+            resume.Width = 140;
+            main.X = 460;
+            main.Y = 300;
+            main.Width = 140;
+            main.Height = 50;
+            Drawing filler = new Drawing();
+            _drawing = filler;
+            _drawing.AddShape(resume);
+            _drawing.AddShape(main);
         }
 
         //The process of game
         private void ProcessGame()
         {
-            if (!IsDead) {
+            Point2D click = new Point2D();
+            click.X = SwinGame.MouseX();
+            click.Y = SwinGame.MouseY();
+            if (!IsDead)
+            {
                 //need to add condition for when ship is hit/dead
-                if (SwinGame.KeyDown (KeyCode.vk_d)) {
-                    _ship.IncreaseAngle ();
+                if (SwinGame.KeyDown(KeyCode.vk_d))
+                {
+                    _ship.IncreaseAngle();
                 }
-                if (SwinGame.KeyDown (KeyCode.vk_a)) {
-                    _ship.DecreaseAngle ();
+                if (SwinGame.KeyDown(KeyCode.vk_a))
+                {
+                    _ship.DecreaseAngle();
                 }
-                if (SwinGame.KeyDown (KeyCode.vk_w)) {
-                    _ship.MoveUp ();
+                if (SwinGame.KeyDown(KeyCode.vk_w))
+                {
+                    _ship.MoveUp();
                 }
-                if (SwinGame.KeyDown (KeyCode.vk_s)) {
-                    _ship.MoveDown ();
+                if (SwinGame.KeyDown(KeyCode.vk_s))
+                {
+                    _ship.MoveDown();
                 }
-                if (SwinGame.MouseClicked (MouseButton.LeftButton)) { _ship.AddBullet (); }
+
+                _drawing.SelectShapesAt(click);
+                if (SwinGame.MouseClicked(MouseButton.LeftButton))
+                {
+                    if (_drawing.GetButton("||").IsAt(click))
+                    {
+                        _saveddrawing = _drawing;
+                        _screentype = ScreenType.Pause;
+                        InitializePause();
+                    }
+                    else
+                    {
+                        _ship.AddBullet();
+                    }
+                }
 
             }
         }
@@ -320,16 +401,49 @@ namespace MyGame.src
                 else if (_drawing.GetButton("Exit").Selected)
                 {
                     _isQuit = true;
+                    
                 }
             }
         }
         private void ProcessGOver()
         {
-
+            Point2D click = new Point2D();
+            click.X = SwinGame.MouseX();
+            click.Y = SwinGame.MouseY();
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                _drawing.SelectShapesAt(click);
+                if (_drawing.GetButton("Main").Selected)
+                {
+                    _screentype = ScreenType.Title;
+                    InitializeTitle();
+                }
+                else if (_drawing.GetButton("Quit").Selected)
+                {
+                    _isQuit = true;
+                }
+            }
         }
         private void ProcessPause()
         {
-
+            Point2D click = new Point2D();
+            click.X = SwinGame.MouseX();
+            click.Y = SwinGame.MouseY();
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                _drawing.SelectShapesAt(click);
+                if (_drawing.GetButton("Resume").Selected)
+                {
+                    _drawing = _saveddrawing;
+                    _screentype = ScreenType.Game;
+                    
+                }
+                else if (_drawing.GetButton("Main").Selected)
+                {
+                    _screentype = ScreenType.Title;
+                    InitializeTitle();
+                }
+            }
         }
     }
 }

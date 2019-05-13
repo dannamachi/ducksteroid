@@ -69,6 +69,7 @@ namespace MyGame.src
                 _shapes.Add(s);
         }
 
+
         public Text GetButton(string s)
         {
             foreach (Shape sh in _shapes)
