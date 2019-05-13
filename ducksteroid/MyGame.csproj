@@ -59,6 +59,8 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="src\Bullet.cs" />
+    <Compile Include="src\Circle.cs" />
+    <Compile Include="src\DrawPicture.cs" />
     <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\Screen.cs" />
