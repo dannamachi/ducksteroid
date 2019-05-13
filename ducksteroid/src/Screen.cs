@@ -87,9 +87,9 @@ namespace MyGame.src
                 }
                 
                 _ship.Shoot ();
+                _timer.StartTimer();
 
-                
-               
+
             }
             if (IsPaused)
             {
@@ -256,7 +256,7 @@ namespace MyGame.src
            
             Circle round = new Circle(Color.White, 769, 30, 20);
             _timer = new Timer();
-            _timer.StartTimer();
+            
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
             
             _drawing = temp;

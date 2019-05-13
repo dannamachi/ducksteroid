@@ -15,7 +15,7 @@ namespace MyGame.src
             _min = 2;
             _sec = 30;
             _tick = 58;
-            Font font = new Font ("arial.ttf", 20);
+            Font font = SwinGame.LoadFont("Arial", 20);
             t = new Text (Color.White, "02:30", font);
             _lastcalled = TimeInSec;
         }
