@@ -87,6 +87,14 @@ namespace MyGame.src
                 
                 _ship.Shoot ();
 
+                _timer.LastCalledSec = _timer.TimeInSec;
+                _timer.StartTimer();
+
+                //draw joke every 4s
+                if (_timer.TimeInSec % 8 < 5)
+                {
+                    JokeEngine.DrawJoke();
+                }
             }
             if (IsPaused)
             {
@@ -99,16 +107,8 @@ namespace MyGame.src
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("GOscreen.png"), 100, 100);
                 A.DrawIt();
             }
-                _timer.LastCalledSec = _timer.TimeInSec;
-                _timer.StartTimer ();
 
-                //draw joke every 4s
-                if (_timer.TimeInSec % 8 < 5)
-                {
-                    JokeEngine.DrawJoke();
-                }
-
-            }
+        }
 
         
         public void ProcessInput()
