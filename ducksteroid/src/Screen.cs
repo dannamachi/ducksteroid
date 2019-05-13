@@ -59,16 +59,16 @@ namespace MyGame.src
         
             if (IsPlaying)
             {
-
-                //DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
-                //pause.DrawIt();
-                Text words = new Text(Color.White, "Pause", SwinGame.LoadFont("Arial", 20));
+                Text words = new Text(Color.White, "||", SwinGame.LoadFont("Arial", 20));
                 words.X = 751;
                 words.Y = 13;
                 words.Width = 40;
                 words.Height = 30;
                 words.Draw();
                 _drawing.AddShape(words);
+                DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
+                pause.DrawIt();
+               
 
                 Text test = new Text(Color.Red, _ship.CenterCoord, SwinGame.LoadFont("Arial", 20));
                 test.X = 500;
@@ -356,7 +356,7 @@ namespace MyGame.src
                 _drawing.SelectShapesAt(click);
                 if (SwinGame.MouseClicked(MouseButton.LeftButton))
                 {
-                    if (_drawing.GetButton("Pause").Selected)
+                    if (_drawing.GetButton("||").IsAt(click))
                     {
                         _saveddrawing = _drawing;
                         _screentype = ScreenType.Pause;
