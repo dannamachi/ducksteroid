@@ -17,7 +17,7 @@ namespace MyGame.src
             _sec = new Counter ();
             _min = new Counter ();
             _hr = new Counter ();
-            Font font = new Font ("arial.ttf", 20);
+            Font font = SwinGame.LoadFont("arial.ttf", 20);
             _text = new Text (Color.White, "00:00", font);
             _lastcalled = TimeInSec;
         }
