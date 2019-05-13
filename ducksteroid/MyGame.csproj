@@ -56,7 +56,9 @@
     </CustomCommands>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\jokes.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Bullet.cs" />
     <Compile Include="src\Duck.cs" />
