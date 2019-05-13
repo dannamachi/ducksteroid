@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
 using System;
 using MyGame.src;
 
@@ -23,52 +22,57 @@ namespace Tests
             return rank;
         }
 
-        //test: add score to a ranking obj
-        //expected: contain the score added (true)
+        //test: check if ranking adds the correct score
+        //expected: contain the correct score reference (true)
         [Test]
-        public void TestAddScore()
+        public void TestAddCorrectScore()
         {
-            Ranking rank = new Ranking();
+            Ranking rank = Setup();
             Score score1 = new Score("ducktrial1", 20);
-            Score score2 = new Score("ducktrial2", 15);
             rank.AddScore(score1);
-            rank.AddScore(score2);
+            bool actual = rank.Scores.Contains(score1);
 
-            bool actual = rank.Scores.Contains(score2);
             Assert.AreEqual(true, actual, "Test ranking can add score");
         }
-        //test: check if file can be loaded from
-        //expected: file is missing so cannot load (false)
+        //test: check if file is saved correctly
+        //expected: number of scores in the ranking obj
         [Test]
-        public void TestCheckFileMissing()
+        public void TestSaveFile1()
         {
-            Ranking rank = new Ranking();
-            bool actual = rank.CheckFile("scorenope.txt");
-
-            Assert.AreEqual(false, actual, "Test ranking can detect missing file");
+            Ranking rank = Setup();
+            rank.SaveFile("scores.txt");
+            rank.LoadFile("scores.txt");
+            string line = rank.GetLine();
+            int actual = Convert.ToInt32(line.TrimEnd());
+            int num = rank.Scores.Count;
+            Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
-        //test: check if file can be loaded from
-        //expected: file has more than 11 lines so cannot load (false)
+        //test: check if file is saved correctly
+        //expected: value of 2nd score from top
         [Test]
-        public void TestCheckFileValid1()
+        public void TestSaveFile2()
         {
-            Ranking rank = new Ranking();
-            bool actual = rank.CheckFile("scoreover11.txt");
-
-            Assert.AreEqual(false, actual, "Test ranking can check for file validity");
+            Ranking rank = Setup();
+            rank.SaveFile("scores.txt");
+            rank.LoadFile("scores.txt");
+            rank.GetLine();
+            rank.GetLine();
+            int actual = Convert.ToInt32(rank.GetLine().TrimEnd());
+            int num = rank.Scores[1].Value;
+            Assert.AreEqual(num, actual, "Test ranking can save to file");
         }
-        //test: check if file can be loaded from
-        //expected: file has non-digit chars so cannot load (false)
+        //test: check if file exists and is in correct format to load from (less than 11 lines, contains only digit)
+        //expected: file exists and is in correct format (true)
         [Test]
-        public void TestCheckFileValid2()
+        public void TestCheckFileValid()
         {
             Ranking rank = new Ranking();
-            bool actual = rank.CheckFile("scorenondigit.txt");
+            bool actual = rank.CheckFile("scores.txt");
 
             Assert.AreEqual(false, actual, "Test ranking can check for file validity");
         }
         //test: check if ranking obj can read file content, line by line
-        //expected: concatenated string of first 3 lines of file 
+        //expected: concatenated string of first 3 lines of file
         [Test]
         public void TestGetContentFromFile()
         {
@@ -83,32 +87,6 @@ namespace Tests
             }
             Assert.AreEqual("22015", actual, "Test ranking can print file content");
         }
-        //test: check if file is saved correctly
-        //expected: number of scores in the ranking obj 
-        [Test]
-        public void TestSaveFile1()
-        {
-            Ranking rank = Setup();
-            rank.SaveFile("scores.txt");
-            StreamReader reader = new StreamReader("scores.txt");
-            int actual = Convert.ToInt32(reader.ReadLine());
-            int num = rank.Scores.Count;
-            Assert.AreEqual(num, actual, "Test ranking can save to file");
-        }
-        //test: check if file is saved correctly
-        //expected: value of 2nd score from top
-        [Test]
-        public void TestSaveFile2()
-        {
-            Ranking rank = Setup();
-            rank.SaveFile("scores.txt");
-            StreamReader reader = new StreamReader("scores.txt");
-            reader.ReadLine();
-            reader.ReadLine();
-            int actual = Convert.ToInt32(reader.ReadLine());
-            int num = rank.Scores[1].Value;
-            Assert.AreEqual(num, actual, "Test ranking can save to file");
-        }
         //test: check if ranking obj can sort score objs by value
         //expected: list of scores is sorted (true)
         [Test]
@@ -119,9 +97,13 @@ namespace Tests
             bool actual = true;
             for (int i = 0; i < rank.Scores.Count; i++)
             {
-                for (int j = i + 1; j < rank.Scores.Count; j++)
+                if (i > 0)
                 {
-                    if (rank.Scores[i].Value < rank.Scores[j].Value) { actual = false; break; }
+                    if (rank.Scores[i] > rank.Scores[i - 1]) { actual = false; break; }
+                }
+                if (i < rank.Scores.Count - 1)
+                {
+                    if (rank.Scores[i] < rank.Scores[i + 1]) { actual = false; break; }
                 }
             }
             Assert.AreEqual(true, actual, "Test ranking can sort scores");
@@ -143,15 +125,8 @@ namespace Tests
             rank.AddScore(score3);
             rank.AddScore(score2);
             int num = rank.Scores.Count;
-            bool sorted = true;
-            for (int i = 0; i < rank.Scores.Count; i++)
-            {
-                for (int j = i + 1; j < rank.Scores.Count; j++)
-                {
-                    if (rank.Scores[i].Value < rank.Scores[j].Value) { sorted = false; break; }
-                }
-            }
-            bool actual = (num == 10) && sorted;
+
+            bool actual = (num == 10);
             Assert.AreEqual(true, actual, "Test ranking can add score with score count above 10");
         }
     }
