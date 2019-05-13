@@ -12,12 +12,11 @@ namespace MyGame.src
         //Constructors
         public Timer ()
         {
-
             _tick = new Counter ();
             _sec = new Counter ();
             _min = new Counter ();
             _hr = new Counter ();
-            Font font = SwinGame.LoadFont("Arial", 20);
+            Font font = new Font ("arial.ttf", 20);
             _text = new Text (Color.White, "00:00", font);
             _lastcalled = TimeInSec;
         }
