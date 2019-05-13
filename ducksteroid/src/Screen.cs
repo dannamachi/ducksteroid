@@ -65,8 +65,10 @@ namespace MyGame.src
                 }
                 if (!IsDead) {
                     _ship.Draw ();
+                    _timer.StartTimer ();
                 }
                 _ship.Shoot ();
+
 
                 _timer.LastCalledSec = _timer.TimeInSec;
                 _timer.StartTimer ();
@@ -76,6 +78,7 @@ namespace MyGame.src
                 {
                     JokeEngine.DrawJoke();
                 }
+
             }
 
         }
@@ -115,6 +118,7 @@ namespace MyGame.src
                     if (_timer.TimeInSec % 8 == 5 && _timer.LastCalledSec != _timer.TimeInSec)
                     {
                         JokeEngine.GetJoke();
+
                     }
                 }
             }
