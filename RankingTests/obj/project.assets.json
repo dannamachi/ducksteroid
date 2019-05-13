@@ -1645,6 +1645,15 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "MyGame/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/MyGame.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MyGame.dll": {}
+        }
       }
     }
   },
@@ -5741,12 +5750,18 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "MyGame/1.0.0": {
+      "type": "project",
+      "path": "../ducksteroid/MyGame.csproj",
+      "msbuildProject": "../ducksteroid/MyGame.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.NET.Test.Sdk >= 15.8.0",
       "Microsoft.NETCore.App >= 2.1.0",
+      "MyGame >= 1.0.0",
       "NUnit3TestAdapter >= 3.10.0",
       "nunit >= 3.10.1"
     ]
@@ -5780,7 +5795,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\HAIHA\\Desktop\\Customer 181567\\BA-CS\\Sem2\\Dev\\Open\\ducksteroid\\ducksteroid\\MyGame.csproj": {
+              "projectPath": "C:\\Users\\HAIHA\\Desktop\\Customer 181567\\BA-CS\\Sem2\\Dev\\Open\\ducksteroid\\ducksteroid\\MyGame.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
