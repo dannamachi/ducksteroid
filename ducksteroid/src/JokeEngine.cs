@@ -46,26 +46,6 @@ namespace MyGame.src
             for (int i = 0; i < num; i++)
             {
                 joke = ReadJoke(reader);
-                posNum = rand.Next(1, 4);
-                switch (posNum)
-                {
-                    case 1:
-                        joke.X = 100;
-                        joke.Y = 75;
-                        break;
-                    case 2:
-                        joke.X = 500;
-                        joke.Y = 75;
-                        break;
-                    case 3:
-                        joke.X = 100;
-                        joke.Y = 375;
-                        break;
-                    case 4:
-                        joke.X = 500;
-                        joke.Y = 375;
-                        break;
-                }
                 _jokes.Add(joke);
             }
             reader.Close();
@@ -80,6 +60,27 @@ namespace MyGame.src
             _count += 1;
             if (_count == _jokes.Count) { _count = 0; }
             _joke = _jokes[_count];
+            Random rand = new Random();
+            int posNum = rand.Next(1, 4);
+            switch (posNum)
+            {
+                case 1:
+                    _joke.X = 100;
+                    _joke.Y = 75;
+                    break;
+                case 2:
+                    _joke.X = 500;
+                    _joke.Y = 75;
+                    break;
+                case 3:
+                    _joke.X = 100;
+                    _joke.Y = 375;
+                    break;
+                case 4:
+                    _joke.X = 500;
+                    _joke.Y = 375;
+                    break;
+            }
         }
     }
 }

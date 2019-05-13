@@ -112,7 +112,7 @@ namespace MyGame.src
                         SpawnDuck();
                     }
                     //spawn joke every 4s
-                    if (_timer.TimeInSec % 4 == 0 && _timer.LastCalledSec != _timer.TimeInSec)
+                    if (_timer.TimeInSec % 8 == 5 && _timer.LastCalledSec != _timer.TimeInSec)
                     {
                         JokeEngine.GetJoke();
                     }
