@@ -82,12 +82,10 @@ namespace MyGame.src
                 }
                 if (!IsDead) {
                     _ship.Draw ();
-
+                   
                 }
                 
                 _ship.Shoot ();
-                _timer.StartTimer();
-
 
             }
             if (IsPaused)
@@ -100,6 +98,16 @@ namespace MyGame.src
             {
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("GOscreen.png"), 100, 100);
                 A.DrawIt();
+            }
+                _timer.LastCalledSec = _timer.TimeInSec;
+                _timer.StartTimer ();
+
+                //draw joke every 4s
+                if (_timer.TimeInSec % 8 < 5)
+                {
+                    JokeEngine.DrawJoke();
+                }
+
             }
 
         }
@@ -128,14 +136,19 @@ namespace MyGame.src
                 _isdead = CheckDead ();
                 if(!_isdead){
                     _ship.Update ();
-                CheckOutobound ();
-                CheckShooting();
-                
-                if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
-                    SpawnDuck(); 
-                    _timer.LastCalledSec = _timer.TimeInSec; 
-                }
-   
+                    CheckOutobound ();
+                    CheckShooting();
+
+                    //spawn duck every 2s
+                    if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
+                        SpawnDuck();
+                    }
+                    //spawn joke every 4s
+                    if (_timer.TimeInSec % 8 == 5 && _timer.LastCalledSec != _timer.TimeInSec)
+                    {
+                        JokeEngine.GetJoke();
+
+                    }
                 }
                 else
                 {
@@ -262,6 +275,8 @@ namespace MyGame.src
             _ducks = new List<Duck>();
             _isdead = false;
             
+
+            JokeEngine.LoadJokes();
 
         }
         private void InitializeTitle()

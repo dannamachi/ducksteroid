@@ -56,13 +56,17 @@
     </CustomCommands>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\jokes.txt" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Bullet.cs" />
     <Compile Include="src\Circle.cs" />
     <Compile Include="src\DrawPicture.cs" />
     <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Joke.cs" />
+    <Compile Include="src\JokeEngine.cs" />
     <Compile Include="src\Screen.cs" />
     <Compile Include="src\Drawing.cs" />
     <Compile Include="src\Rectangle.cs" />
