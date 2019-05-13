@@ -59,18 +59,11 @@ namespace MyGame.src
         
             if (IsPlaying)
             {
-                
-                Text words = new Text(Color.White, "P", SwinGame.LoadFont("Arial", 20));
-                words.X = 751;
-                words.Y = 13;
-                words.Width = 40;
-                words.Height = 30;
-                words.Draw();
-                _drawing.AddShape(words);
 
-                DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
-                pause.DrawIt();
-                
+                //DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
+                //pause.DrawIt();
+       
+        
                 Text test = new Text(Color.Red, _ship.CenterCoord, SwinGame.LoadFont("Arial", 20));
                 test.X = 500;
                 test.Y = 500;
@@ -95,8 +88,6 @@ namespace MyGame.src
             {
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("PauseScreen.png"), 175, 150);
                 A.DrawIt();
-            
-
             }
              
             if (IsGO)
@@ -253,15 +244,19 @@ namespace MyGame.src
         //Initialize everything while playing game
         private void InitializeGame()
         {
-           
-            Circle round = new Circle(Color.White, 769, 30, 20);
+
             _timer = new Timer();
             
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
-            
+
             _drawing = temp;
-            _drawing.AddShape(round);
-            
+            Text words = new Text(Color.White, "Pause", SwinGame.LoadFont("Arial", 20));
+            words.X = 751;
+            words.Y = 13;
+            words.Width = 40;
+            words.Height = 30;
+            words.Draw();
+            _drawing.AddShape(words);
             _saveddrawing = temp;
             _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
@@ -297,6 +292,7 @@ namespace MyGame.src
         {
             Text main = new Text(Color.Yellow, "Main", SwinGame.LoadFont("Arial", 20));
             Text quit = new Text(Color.Yellow, "Quit", SwinGame.LoadFont("Arial", 20));
+
             main.X = 167;
             main.Y = 290;
             main.Height = 50;
@@ -316,6 +312,7 @@ namespace MyGame.src
         {
             Text resume = new Text(Color.Yellow, "Resume", SwinGame.LoadFont("Arial", 20));
             Text main = new Text(Color.Yellow, "Main", SwinGame.LoadFont("Arial", 20));
+       
             resume.X = 220;
             resume.Y = 300;
             resume.Height = 50;
@@ -324,11 +321,10 @@ namespace MyGame.src
             main.Y = 300;
             main.Width = 140;
             main.Height = 50;
+            Drawing filler = new Drawing();
+            _drawing = filler;
             _drawing.AddShape(resume);
             _drawing.AddShape(main);
-            
-
-
         }
 
         //The process of game
@@ -356,11 +352,13 @@ namespace MyGame.src
                 {
                     _ship.MoveDown();
                 }
-           
+
+                _drawing.SelectShapesAt(click);
                 if (SwinGame.MouseClicked(MouseButton.LeftButton))
                 {
-                    _drawing.SelectShapesAt(click);
-                    if(_drawing.GetButton("P").Selected){
+                    if (_drawing.GetButton("Pause").Selected)
+                    {
+                        _saveddrawing = _drawing;
                         _screentype = ScreenType.Pause;
                         InitializePause();
                     }
@@ -369,6 +367,7 @@ namespace MyGame.src
                         _ship.AddBullet();
                     }
                 }
+
             }
         }
         private void ProcessTitle()
@@ -420,8 +419,9 @@ namespace MyGame.src
                 _drawing.SelectShapesAt(click);
                 if (_drawing.GetButton("Resume").Selected)
                 {
+                    _drawing = _saveddrawing;
                     _screentype = ScreenType.Game;
-                    InitializeGame();
+                    
                 }
                 else if (_drawing.GetButton("Main").Selected)
                 {
