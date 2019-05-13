@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Bullet.cs" />
+    <Compile Include="src\Counter.cs" />
     <Compile Include="src\DrawPicture.cs" />
     <Compile Include="src\Duck.cs" />
     <Compile Include="src\GameMain.cs" />
