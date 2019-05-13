@@ -68,17 +68,6 @@ namespace MyGame.src
                     _timer.StartTimer ();
                 }
                 _ship.Shoot ();
-
-
-                _timer.LastCalledSec = _timer.TimeInSec;
-                _timer.StartTimer ();
-
-                //draw joke every 4s
-                if (_timer.TimeInSec % 8 < 5)
-                {
-                    JokeEngine.DrawJoke();
-                }
-
             }
 
         }
@@ -109,16 +98,10 @@ namespace MyGame.src
                     _ship.Update ();
                     CheckOutobound ();
                     CheckShooting();
-
-                    //spawn duck every 2s
+                
                     if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
-                        SpawnDuck();
-                    }
-                    //spawn joke every 4s
-                    if (_timer.TimeInSec % 8 == 5 && _timer.LastCalledSec != _timer.TimeInSec)
-                    {
-                        JokeEngine.GetJoke();
-
+                        SpawnDuck(); 
+                        _timer.LastCalledSec = _timer.TimeInSec; 
                     }
                 }
             }
@@ -235,8 +218,6 @@ namespace MyGame.src
             _ducks = new List<Duck>();
             _isdead = false;
             _timer = new Timer ();
-
-            JokeEngine.LoadJokes();
 
         }
         private void InitializeTitle()
