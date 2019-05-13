@@ -62,8 +62,14 @@ namespace MyGame.src
 
                 //DrawPicture pause = new DrawPicture(SwinGame.LoadBitmap("Pause.png"), 750, 10);
                 //pause.DrawIt();
-       
-        
+                Text words = new Text(Color.White, "Pause", SwinGame.LoadFont("Arial", 20));
+                words.X = 751;
+                words.Y = 13;
+                words.Width = 40;
+                words.Height = 30;
+                words.Draw();
+                _drawing.AddShape(words);
+
                 Text test = new Text(Color.Red, _ship.CenterCoord, SwinGame.LoadFont("Arial", 20));
                 test.X = 500;
                 test.Y = 500;
@@ -250,13 +256,7 @@ namespace MyGame.src
             Drawing temp = new Drawing(SwinGame.LoadBitmap("starSky.jpg"));
 
             _drawing = temp;
-            Text words = new Text(Color.White, "Pause", SwinGame.LoadFont("Arial", 20));
-            words.X = 751;
-            words.Y = 13;
-            words.Width = 40;
-            words.Height = 30;
-            words.Draw();
-            _drawing.AddShape(words);
+
             _saveddrawing = temp;
             _ship = new Ship(Color.White,400,300, 20);
             _ducks = new List<Duck>();
