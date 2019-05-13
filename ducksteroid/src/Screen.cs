@@ -65,9 +65,10 @@ namespace MyGame.src
                 }
                 if (!IsDead) {
                     _ship.Draw ();
-                    _timer.StartTimer ();
                 }
                 _ship.Shoot ();
+
+                _timer.StartTimer ();
             }
 
         }
@@ -96,13 +97,13 @@ namespace MyGame.src
                 _isdead = CheckDead ();
                 if(!_isdead){
                     _ship.Update ();
-                    CheckOutobound ();
-                    CheckShooting();
+                CheckOutobound ();
+                CheckShooting();
                 
-                    if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
-                        SpawnDuck(); 
-                        _timer.LastCalledSec = _timer.TimeInSec; 
-                    }
+                if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
+                    SpawnDuck(); 
+                    _timer.LastCalledSec = _timer.TimeInSec; 
+                }
                 }
             }
         }
