@@ -23,7 +23,7 @@ namespace MyGame
 
 
                 screen.ProcessInput();
-                if (screen.IsQuit == true) { break; }
+                if (screen.IsQuit) { break; }
                 screen.Update();
 
 
