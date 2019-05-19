@@ -130,7 +130,12 @@ namespace MyGame.src
             Vector newpoint = new Vector ();
             newpoint.X = direction.X * 5 * (float)Math.Cos (Math.PI * critangle / 180);
             newpoint.Y = direction.Y * 5 * (float)Math.Sin (Math.PI * critangle / 180);
-            _center = SwinGame.AddVectors (_center, newpoint);
+            Point2D loco = SwinGame.AddVectors(_center, newpoint);
+            if(SwinGame.PointInRect(loco, 20, 120, 760, 565))
+            {
+                _center = loco;
+            }
+            
         }
         public void MoveUp () => Move (CritAngle (), Direction);
         public void MoveDown ()
