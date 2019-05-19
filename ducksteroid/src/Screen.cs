@@ -98,6 +98,7 @@ namespace MyGame.src
             }
             if (IsPaused)
             {
+                _saveddrawing.Draw();
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("PauseScreen.png"), 175, 150);
                 A.DrawIt();
             }
