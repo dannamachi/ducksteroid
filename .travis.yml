@@ -4,5 +4,5 @@ install:
   - nuget restore ./ducksteroid/MyGame.sln
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
-  - msbuild /p:Configuration=Release ./ducksteroid/MyGame.sln
+  - msbuild /p:Configuration=Debug ./ducksteroid/MyGame.sln
   - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./ducksteroid/TestsMono/bin/Debug/TestsMono.dll
