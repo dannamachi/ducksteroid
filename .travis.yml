@@ -5,7 +5,7 @@ matrix:
     - dotnet: 2.1
       mono: none
       script:
-        - export FrameworkPathOverride=/home/travis/.nuget/packages/microsoft.netcore.app/2.1.0/ref/netcoreapp2.1/
+        - export FrameworkPathOverride=/usr/lib/mono/4.0-api
         - dotnet build -f net40
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build ./ducksteroid/MyGame.sln
