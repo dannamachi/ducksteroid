@@ -6,8 +6,8 @@ matrix:
       mono: none
       env: DOTNETCORE=2
       script:
-        - dotnet restore
-        - dotnet build
+        - dotnet restore ./ducksteroid/MyGame.csproj
+        - dotnet build --configuration Release ./ducksteroid/MyGame.sln
         - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
         - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./Tests/bin/Debug/netcoreapp2.1/libSGSDK.dylib
       after_script:
