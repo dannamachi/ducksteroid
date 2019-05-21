@@ -5,10 +5,9 @@ matrix:
     - dotnet: 2.1
       mono: none
       script:
-        - export FrameworkPathOverride=/usr/lib/mono/4.0-api
-        - dotnet build -f net40
+        - export FrameworkPathOverride=/usr/lib/mono/4.0-api/
         - dotnet restore ./ducksteroid/MyGame.csproj
-        - dotnet build ./ducksteroid/MyGame.sln
+        - dotnet build -f net40 ./ducksteroid/MyGame.sln
     - mono: latest
       install:
         - nuget restore ./ducksteroid/MyGame.sln
