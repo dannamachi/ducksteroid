@@ -8,6 +8,7 @@ matrix:
         - export FrameworkPathOverride=/usr/lib/mono/4.0-api/
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build -f net40 ./ducksteroid/MyGame.sln
+        - nunit-console MyGame.csproj
     - mono: latest
       install:
         - nuget restore ./ducksteroid/MyGame.sln
