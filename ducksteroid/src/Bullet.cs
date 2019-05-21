@@ -1,7 +1,7 @@
 ﻿using System;
 using SwinGameSDK;
 
-namespace MyGame.src
+namespace MyGame
 {
     public class Bullet : Shape
     {

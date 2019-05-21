@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace MyGame.src
+namespace MyGame
 {
     public class Score
     {

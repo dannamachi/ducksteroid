@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SwinGameSDK;
 
-namespace MyGame.src
+namespace MyGame
 {
     public abstract class Shape
     {

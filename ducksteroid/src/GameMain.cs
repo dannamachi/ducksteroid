@@ -1,6 +1,5 @@
 using System;
 using SwinGameSDK;
-using MyGame.src;
 
 namespace MyGame
 {
