@@ -5,18 +5,20 @@ matrix:
     - dotnet: 2.1.502
       mono: none
       env: DOTNETCORE=2
+      script:
+        - dotnet restore
+        - dotnet build
+        - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
+        - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./Tests/bin/Debug/netcoreapp2.1/libSGSDK.dylib
+      after_script:
+        - dotnet test ./Tests/Tests.csproj --no-build
     - mono: latest
-install:
-  - nuget restore ./ducksteroid/MyGame.sln
-  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
-script:
-  - dotnet restore
-  - dotnet build    
-  - msbuild /p:Configuration=Release ./ducksteroid/MyGame.sln
-  - cp ./ducksteroid/bin/Debug/SGSDK.dll ./ducksteroid/TestsMono/bin/Debug/SGSDK.dll
-  - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./ducksteroid/TestsMono/bin/Debug/libSGSDK.dylib
-  - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
-  - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./Tests/bin/Debug/netcoreapp2.1/libSGSDK.dylib
-after_script:  
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./ducksteroid/TestsMono/bin/Debug/TestsMono.dll
-  - dotnet test ./Tests/Tests.csproj --no-build
+      install:
+        - nuget restore ./ducksteroid/MyGame.sln
+        - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+      script:
+        - msbuild /p:Configuration=Release ./ducksteroid/MyGame.sln
+        - cp ./ducksteroid/bin/Debug/SGSDK.dll ./ducksteroid/TestsMono/bin/Debug/SGSDK.dll
+        - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./ducksteroid/TestsMono/bin/Debug/libSGSDK.dylib
+      after_script:
+        - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./ducksteroid/TestsMono/bin/Debug/TestsMono.dll
