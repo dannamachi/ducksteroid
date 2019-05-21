@@ -1,9 +1,6 @@
-5
-I once dated a professional tennis player...
-But I had to end it when I realised love meant nothing to her.
-?
-I never understood school shooting jokes
-I guess they're aimed at a younger audience...
+20
+I'd like to make the world a better place..
+but they won't give me the source code. 
 ?
 “Do you know how much it is to rent a church singing group?”
 “Sir, do you mean a choir?”
@@ -14,4 +11,51 @@ you clearly don't understand the gravity of the situation
 ?
 If Britain leaves the EU, how much space will be freed up?
 1GB
+?
+Why do Java programmers wear glasses?
+They can't C#
+?
+How does a computer get drunk?
+It takes screenshots
+?
+Have you heard of the new band "1023 Megabytes"? 
+They don't have a gig yet.
+?
+I just got fired from my job at the keyboard factory. 
+They told me I wasn’t putting in enough shifts.
+?
+We’ll we’ll we’ll…if it isn’t autocorrect.
+?
+Q: Why was the cell phone wearing glasses?
+A: It lost its contacts.
+?
+Q. What do you call it when you have your grandma on speed dial?
+A. Instagram.
+?
+Debugging : being the detective in a crime movie where you are also
+the murderer.
+?
+!false
+Its funny cause its true.
+?
+What makes code bad?
+No comment
+
+?
+How many programmers does it take to change a lightbulb?
+None, its a hardware problem. 
+
+?
+Algorithm - word used by programmers
+when they do not want to explain what they did. 
+
+?
+My code does not have bugs. It just develops random unexpected features.
+?
+If debuggin is the process of removing software bugs,
+then programming must be the process of putting them in. 
+?
+Inheritance : The object-oriented method to get wealthy.
+?
+I couldn't figure out why the baseball kept getting larger. Then it hit me.
 ?
