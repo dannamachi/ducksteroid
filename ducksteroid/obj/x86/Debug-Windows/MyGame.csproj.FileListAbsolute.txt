@@ -54,3 +54,10 @@ C:\Users\Sarah\Documents\GitHub\ducksteroid\ducksteroid\obj\x86\Debug-Windows\My
 C:\Users\Sarah\Documents\GitHub\ducksteroid\ducksteroid\obj\x86\Debug-Windows\MyGame.csproj.CoreCompileInputs.cache
 C:\Users\Sarah\Documents\GitHub\ducksteroid\ducksteroid\obj\x86\Debug-Windows\MyGame.csproj.CopyComplete
 C:\Users\Sarah\Documents\GitHub\ducksteroid\ducksteroid\obj\x86\Debug-Windows\MyGame.exe
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\NUnit3.TestAdapter.dll
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\nunit.engine.dll
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\nunit.engine.api.dll
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\nunit.framework.dll
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\nunit.framework.pdb
+C:\Users\HAIHA\Desktop\Customer 181567\BA-CS\Sem2\Dev\Open\ducksteroid\ducksteroid\bin\Debug\nunit.framework.xml
