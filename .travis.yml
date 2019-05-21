@@ -5,10 +5,11 @@ matrix:
     - dotnet: 2.1
       mono: none
       script:
+        - sudo apt-get install dotnet-sdk-2.1
         - export FrameworkPathOverride=/usr/lib/mono/4.0/
-        - dotnet build -f net40
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build ./ducksteroid/MyGame.sln
+        - cp ./ducksteroid/bin/Debug/mscorlib.dll ./Tests/bin/Debug/netcoreapp2.1/mscorlib.dll
         - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
         - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./Tests/bin/Debug/netcoreapp2.1/libSGSDK.dylib
       after_script:
