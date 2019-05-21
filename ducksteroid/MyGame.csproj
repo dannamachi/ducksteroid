@@ -83,7 +83,6 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System" />
-    <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\animations\startup.txt">
