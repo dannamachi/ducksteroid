@@ -1,5 +1,7 @@
 language: csharp
 solution: ./ducksteroid/MyGame.sln
+before_script:
+  - chmod +x dotNetFx40_Full_setup.exe
 matrix:
   include:
     - dotnet: 2.1
