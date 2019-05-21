@@ -5,8 +5,11 @@ matrix:
     - dotnet: 2.1
       mono: none
       script:
-        - export FrameworkPathOverride=/usr/lib/mono/4.0/
-        - cp ./ducksteroid/mscorlib.dll /usr/lib/mono/4.0/
+        - cd /usr/lib/mono
+        - cp -R ./4.0 /home/travis/build/dannamachi/ducksteroid/framework
+        - cd /home/travis/build/dannamachi/ducksteroid
+        - export FrameworkPathOverride=/home/travis/build/dannamachi/ducksteroid/framework/
+        - cp ./ducksteroid/mscorlib.dll ./framework/mscorlib.dll
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build ./ducksteroid/MyGame.sln
     - mono: latest
