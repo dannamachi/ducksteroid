@@ -9,11 +9,6 @@ matrix:
         - dotnet clean ./ducksteroid/MyGame.csproj
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build ./ducksteroid/MyGame.sln
-        - cp ./ducksteroid/bin/Debug/mscorlib.dll ./Tests/bin/Debug/netcoreapp2.1/mscorlib.dll
-        - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
-        - cp ./ducksteroid/bin/Debug/libSGSDK.dylib ./Tests/bin/Debug/netcoreapp2.1/libSGSDK.dylib
-      after_script:
-        - dotnet test ./Tests/Tests.csproj --no-build
     - mono: latest
       install:
         - nuget restore ./ducksteroid/MyGame.sln
