@@ -5,7 +5,6 @@ matrix:
     - dotnet: 2.1
       mono: none
       script:
-        - ./ducksteroid/dotNetFx40_Full_setup
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build ./ducksteroid/MyGame.sln
         - cp ./ducksteroid/bin/Debug/SGSDK.dll ./Tests/bin/Debug/netcoreapp2.1/SGSDK.dll
