@@ -1,8 +1,8 @@
 language: csharp
-solution: MyGame.sln
+solution: ./ducksteroid/MyGame.sln
 install:
-  - nuget restore MyGame.sln
+  - nuget restore ./ducksteroid/MyGame.sln
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
-  - msbuild /p:Configuration=Release MyGame.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./TestsMono/bin/Debug/TestMono.dll
+  - msbuild /p:Configuration=Release ./ducksteroid/MyGame.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./ducksteroid/TestsMono/bin/Debug/TestsMono.dll
