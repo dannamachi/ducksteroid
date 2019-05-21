@@ -2,7 +2,7 @@ language: csharp
 solution: ./ducksteroid/MyGame.sln
 matrix:
   include:
-    - dotnet: 2.0.0
+    - dotnet: 2.1.0
       mono: none
       script:
         - export FrameworkPathOverride=/usr/lib/mono/4.0/
