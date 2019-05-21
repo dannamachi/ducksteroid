@@ -6,6 +6,7 @@ matrix:
       mono: none
       script:
         - export FrameworkPathOverride=/usr/lib/mono/4.0-api/
+        - cp /usr/lib/mono/4.0-api/mscorlib.dll /home/travis/build/dannamachi/ducksteroid/ducksteroid/bin/Debug/mscorlib.dll
         - dotnet restore ./ducksteroid/MyGame.csproj
         - dotnet build -f net40 ./ducksteroid/MyGame.sln
     - mono: latest
