@@ -2,7 +2,7 @@ language: csharp
 solution: ./ducksteroid/MyGame.sln
 matrix:
   include:
-    - dotnet: latest
+    - dotnet: 4.0
       mono: none
       script:
         - dotnet restore ./ducksteroid/MyGame.csproj
