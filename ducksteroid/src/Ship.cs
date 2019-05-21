@@ -2,7 +2,7 @@
 using SwinGameSDK;
 using System.Collections.Generic;
 
-namespace MyGame.src
+namespace MyGame
 {
     public class Ship : Shape
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using SwinGameSDK;
 
-namespace MyGame.src
+namespace MyGame
 {
     //public enum JokePos
     //{

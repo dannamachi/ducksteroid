@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SwinGameSDK;
 
-namespace MyGame.src
+namespace MyGame
 {
     public class Rectangle : Shape
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using SwinGameSDK;
 
-namespace MyGame.src
+namespace MyGame
 {
     public class Timer
     {
