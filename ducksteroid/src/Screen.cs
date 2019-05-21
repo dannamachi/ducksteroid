@@ -49,14 +49,21 @@ namespace MyGame.src
         public Bitmap Picture { get => _picture.Image; }
         public bool IsGO { get => _screentype == ScreenType.GOver; }
         public bool IsPaused { get => _screentype == ScreenType.Pause; }
-   
+        public bool IsTitle { get => _screentype == ScreenType.Title; }
+
 
 
         //methods
         public void Draw()
         {
+         
             _drawing.Draw();
-        
+            if (IsTitle)
+            {
+                DrawPicture initial = new DrawPicture(SwinGame.LoadBitmap("StartGame.png"), 0, 0);
+                initial.DrawIt();
+            }
+
             if (IsPlaying)
             {
                 Text words = new Text(Color.White, "||", SwinGame.LoadFont("Arial", 20));
@@ -98,7 +105,8 @@ namespace MyGame.src
             }
             if (IsPaused)
             {
-                _saveddrawing.Draw();
+                DrawPicture initial = new DrawPicture(SwinGame.LoadBitmap("starSky.jpg"), 0, 0);
+                initial.DrawIt();
                 DrawPicture A = new DrawPicture(SwinGame.LoadBitmap("PauseScreen.png"), 175, 150);
                 A.DrawIt();
             }
@@ -282,8 +290,6 @@ namespace MyGame.src
         }
         private void InitializeTitle()
         {
-            Drawing initial = new Drawing(SwinGame.LoadBitmap("StartGame.png"));
-            initial.Draw();
             Text play = new Text(Color.Yellow, "Play", SwinGame.LoadFont("Arial", 20));
             Text exit = new Text(Color.Yellow, "Exit", SwinGame.LoadFont("Arial", 20));
             play.X = 340;
@@ -294,6 +300,7 @@ namespace MyGame.src
             exit.Y = 380;
             exit.Width = 170;
             exit.Height = 50;
+            Drawing initial = new Drawing();
             _drawing = initial;
             _drawing.AddShape(play);
             _drawing.AddShape(exit);
