@@ -39,7 +39,6 @@ namespace MyGame
         public static void LoadJokes()
         {
             Random rand = new Random();
-            int posNum;
             StreamReader reader = new StreamReader(_fileName);
             int num = Convert.ToInt32(reader.ReadLine().TrimEnd());
             Joke joke;

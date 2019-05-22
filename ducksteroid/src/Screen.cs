@@ -98,7 +98,7 @@ namespace MyGame
                 _timer.StartTimer();
 
                 //draw joke every 4s
-                if (_timer.TimeInSec % 8 < 5)
+                if (_timer.TimeInSec % 8 < 7)
                 {
                     JokeEngine.DrawJoke();
                 }
@@ -149,11 +149,11 @@ namespace MyGame
                     CheckShooting();
 
                     //spawn duck every 2s
-                    if (_timer.TimeInSec % 2 == 0 && _timer.LastCalledSec != _timer.TimeInSec) { 
+                    if (_timer.TimeInSec % 2 == 1 && _timer.LastCalledSec != _timer.TimeInSec) { 
                         SpawnDuck();
                     }
                     //spawn joke every 4s
-                    if (_timer.TimeInSec % 8 == 5 && _timer.LastCalledSec != _timer.TimeInSec)
+                    if (_timer.TimeInSec % 8 == 6 && _timer.LastCalledSec != _timer.TimeInSec)
                     {
                         JokeEngine.GetJoke();
 
@@ -180,22 +180,22 @@ namespace MyGame
             {
                 case 1:
                     spawnside = SpawnSide.Top;
-                    X = random.Next(0, 800);
+                    X = random.Next(200, 600);
                     Y = (-1) * R;
                     break;
                 case 2:
                     spawnside = SpawnSide.Right;
-                    Y = random.Next(0, 600);
+                    Y = random.Next(150, 450);
                     X = 800 + R;
                     break;
                 case 3:
                     spawnside = SpawnSide.Bottom;
-                    X = random.Next(0, 800);
+                    X = random.Next(200, 600);
                     Y = 600 + R;
                     break;
                 case 4:
                     spawnside = SpawnSide.Left;
-                    Y = random.Next(0, 600);
+                    Y = random.Next(150, 450);
                     X = (-1) * R;
                     break;
             }
