@@ -52,20 +52,20 @@ namespace MyGame
             switch (side)
             {
                 case SpawnSide.Top:
-                    _vel.X = random.Next(-5, 5);
-                    _vel.Y = random.Next(1, 5);
+                    _vel.X = random.Next(-1, 1);
+                    _vel.Y = random.Next(2, 7);
                     break;
                 case SpawnSide.Right:
-                    _vel.X = random.Next(1, 5);
-                    _vel.Y = random.Next(-5, 5);
+                    _vel.X = random.Next(-7, -2);
+                    _vel.Y = random.Next(-1, 1);
                     break;
                 case SpawnSide.Left:
-                    _vel.X = random.Next(-5, -1);
-                    _vel.Y = random.Next(-5, 5);
+                    _vel.X = random.Next(2, 7);
+                    _vel.Y = random.Next(-1, 1);
                     break;
                 case SpawnSide.Bottom:
-                    _vel.X = random.Next(-5, 5);
-                    _vel.Y = random.Next(-5, -1);
+                    _vel.X = random.Next(-1, 1);
+                    _vel.Y = random.Next(-7, -2);
                     break;
             }
         }
