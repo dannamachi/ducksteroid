@@ -27,7 +27,7 @@ namespace MyGame
             Width = w;
             Height = h;
         }
-        public Text (Color boxcolor, float x, float y, Color fontcolor, string text) : this (boxcolor,x,y,50,50,fontcolor,text,SwinGame.LoadFont("Arial",20))
+        public Text (Color boxcolor, float x, float y, Color fontcolor, string text) : this (boxcolor,x,y,50,50,fontcolor,text,SwinGame.LoadFont("Arial",22))
         { 
         }
         public Text () : this (Color.White,0,0,Color.Black,"")
