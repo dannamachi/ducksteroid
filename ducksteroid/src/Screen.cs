@@ -98,7 +98,7 @@ namespace MyGame
                 _timer.StartTimer();
 
                 //draw joke every 4s
-                if (_timer.TimeInSec % 8 < 7)
+                if (_timer.TimeInSec % 8 > 2)
                 {
                     JokeEngine.DrawJoke();
                 }
@@ -153,7 +153,7 @@ namespace MyGame
                         SpawnDuck();
                     }
                     //spawn joke every 4s
-                    if (_timer.TimeInSec % 8 == 6 && _timer.LastCalledSec != _timer.TimeInSec)
+                    if (_timer.TimeInSec % 8 == 2 && _timer.LastCalledSec != _timer.TimeInSec)
                     {
                         JokeEngine.GetJoke();
 
